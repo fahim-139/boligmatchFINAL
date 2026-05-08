@@ -1,0 +1,488 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BoligMatch — Student Rooms in Denmark</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../css/index.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <div class="logo">Bolig<span>Match</span></div>
+    <ul class="nav-links">
+      <li><a href="login.html" class="nav-link">Find a Room</a></li>
+      <li><a href="login.html" class="nav-link">List Your Room</a></li>
+      <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
+      <li><a href="safety-tips.html" class="nav-link">Safety Tips</a></li>
+      <li><a href="register.html" class="nav">Sign Up Free</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-tag">For International Students in Denmark</div>
+      <h1 class="hero-title">
+        Find affordable rooms<br />with <em>no surprises</em>
+      </h1>
+      <p class="hero-sub">
+        Connect directly with private room owners offering flexible deposits and transparent upfront costs — no long
+        waiting lists, no hidden fees.
+      </p>
+
+      <form class="search-box" action="../backend/listings.php" method="GET">
+        <div class="search-top">
+          <div class="search-field">
+            <label>City</label>
+            <select name="city">
+              <option value="">All cities</option>
+              <option value="Copenhagen">Copenhagen</option>
+              <option value="Aalborg">Aalborg</option>
+              <option value="Odense">Odense</option>
+            </select>
+          </div>
+          <div class="search-field">
+            <label>Max Deposit</label>
+            <select name="deposit">
+              <option value="">Any</option>
+              <option value="1">1 month's rent</option>
+              <option value="2">2 months' rent</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="search-btn"><span>🔍</span> Search Available Rooms</button>
+      </form>
+
+      <div class="hero-stats" id="hero-stats">
+        <!-- Stats will be dynamically updated based on listings -->
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-map-bg"></div>
+      <div class="cards-float" id="hero-cards">
+        <!-- Cards will be dynamically populated from database -->
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <div class="trust-strip">
+    <div class="trust-item"><span class="trust-icon">✉️</span> Email verification required</div>
+    <div class="trust-item"><span class="trust-icon">🛡️</span> Report & flag suspicious listings</div>
+    <div class="trust-item"><span class="trust-icon">💬</span> Safe in-platform messaging</div>
+    <div class="trust-item"><span class="trust-icon">🔍</span> Transparent upfront costs</div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="section how-it-works" id="how-it-works">
+    <div class="section-label">The Process</div>
+    <div class="section-title">Simple steps to find your room</div>
+    <div class="how-grid">
+      <div class="how-step">
+        <div class="step-num">01</div>
+        <div class="step-icon">🎓</div>
+        <h3>Create your student profile</h3>
+        <p>Register with your student email address. Verify your account to build trust with room owners. Your profile
+          shows your programme and move-in date.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-num">02</div>
+        <div class="step-icon">🔎</div>
+        <h3>Search with real filters</h3>
+        <p>Filter by city, max monthly rent, and maximum deposit amount. See the full cost breakdown — deposit, prepaid
+          rent, and monthly cost — for every listing.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-num">03</div>
+        <div class="step-icon">💬</div>
+        <h3>Message safely on-platform</h3>
+        <p>Contact room owners through our built-in messaging system. Never share financial details before viewing the
+          room in person. Always view before paying.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LISTINGS PREVIEW -->
+  <section class="section listings-section">
+    <div class="listings-header">
+      <div>
+        <div class="section-label">Latest Listings</div>
+        <div class="section-title">Rooms available now</div>
+      </div>
+      <a href="login.html" id="view-all-link" style="display:none;">View all listings →</a>
+    </div>
+    <!-- Dynamic listings container -->
+    <div class="listings-grid" id="listings-grid">
+      <!-- Listings will be inserted here by JavaScript -->
+    </div>
+    <!-- Empty state (shown when no listings in database) -->
+    <div class="empty-state" id="empty-state">
+      <div class="empty-state-illustration">
+        <svg viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- House outline -->
+          <rect x="60" y="70" width="120" height="90" rx="6" fill="#e8e3dc" stroke="#d5cfc6" stroke-width="2" />
+          <polygon points="120,30 40,75 200,75" fill="#ddd7ce" stroke="#d5cfc6" stroke-width="2"
+            stroke-linejoin="round" />
+          <!-- Door -->
+          <rect x="100" y="110" width="40" height="50" rx="4" fill="#ccc5b8" />
+          <circle cx="132" cy="137" r="3" fill="#b0a898" />
+          <!-- Windows -->
+          <rect x="75" y="90" width="28" height="24" rx="3" fill="#c8dce8" stroke="#b8ccd8" stroke-width="1.5" />
+          <line x1="89" y1="90" x2="89" y2="114" stroke="#b8ccd8" stroke-width="1" />
+          <line x1="75" y1="102" x2="103" y2="102" stroke="#b8ccd8" stroke-width="1" />
+          <rect x="137" y="90" width="28" height="24" rx="3" fill="#c8dce8" stroke="#b8ccd8" stroke-width="1.5" />
+          <line x1="151" y1="90" x2="151" y2="114" stroke="#b8ccd8" stroke-width="1" />
+          <line x1="137" y1="102" x2="165" y2="102" stroke="#b8ccd8" stroke-width="1" />
+          <!-- Search magnifier -->
+          <circle cx="185" cy="50" r="18" fill="none" stroke="#1a7f6e" stroke-width="3" opacity="0.6" />
+          <line x1="198" y1="63" x2="210" y2="75" stroke="#1a7f6e" stroke-width="3" stroke-linecap="round"
+            opacity="0.6" />
+          <!-- Question mark in magnifier -->
+          <text x="185" y="56" text-anchor="middle" font-size="18" font-weight="700" fill="#1a7f6e" opacity="0.5"
+            font-family="DM Sans, sans-serif">?</text>
+          <!-- Decorative dots -->
+          <circle cx="35" cy="55" r="4" fill="#e5e0d8" opacity="0.7" />
+          <circle cx="25" cy="120" r="3" fill="#e5e0d8" opacity="0.5" />
+          <circle cx="215" cy="110" r="3" fill="#e5e0d8" opacity="0.6" />
+          <circle cx="50" cy="145" r="2" fill="#e5e0d8" opacity="0.4" />
+        </svg>
+      </div>
+      <h3 class="empty-state-title">No rooms listed yet</h3>
+      <p class="empty-state-desc">Apartment owners haven't posted any listings yet.<br />Check back soon or be the first
+        to list a room!</p>
+      <a href="register.html" class="empty-state-btn">🏠 List Your Room</a>
+    </div>
+  </section>
+
+  <!-- SAFETY SECTION -->
+  <section class="safety-section" id="safety">
+    <div class="safety-left">
+      <div class="section-label">Your Safety Matters</div>
+      <h2 class="section-title" style="color:white">Built to protect students from scams</h2>
+      <p>As an academic prototype, BoligMatch cannot verify properties in person. Instead, we've built multiple layers
+        of scam-reduction features so you can browse and connect with confidence.</p>
+    </div>
+    <div class="safety-features">
+      <div class="safety-feat">
+        <div class="sf-icon">✉️</div>
+        <div class="sf-text">
+          <h4>Email Verification</h4>
+          <p>All users must verify their email. Student emails increase trust and reduce fake accounts.</p>
+        </div>
+      </div>
+      <div class="safety-feat">
+        <div class="sf-icon">🚩</div>
+        <div class="sf-text">
+          <h4>Report & Flag System</h4>
+          <p>Report suspicious listings or users. Flagged accounts are reviewed and removed if necessary.</p>
+        </div>
+      </div>
+      <div class="safety-feat">
+        <div class="sf-icon">💬</div>
+        <div class="sf-text">
+          <h4>In-Platform Messaging</h4>
+          <p>All communication stays on BoligMatch. Messages are monitored for scam keywords automatically.</p>
+        </div>
+      </div>
+      <div class="safety-feat">
+        <div class="sf-icon">⚠️</div>
+        <div class="sf-text">
+          <h4>Safety Warnings & Tips</h4>
+          <p>First-time users see clear warnings: never pay before viewing, avoid wire transfers, always meet in person.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <span class="section-label">Get Started Today</span>
+    <h2 class="section-title">Ready to find your room in Denmark?</h2>
+    <p>Join hundreds of international students who found affordable housing without the usual upfront costs or long
+      waiting lists.</p>
+    <div class="cta-buttons">
+      <a href="register.html" class="btn-primary">🎓 I'm a Student</a>
+      <a href="register.html" class="btn-secondary">🏠 I Have a Room to Rent</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">Bolig<span>Match</span></div>
+        <p class="footer-desc">A peer-to-peer platform connecting international students with affordable, flexible room
+          rentals in Denmark.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="login.html">Find a Room</a></li>
+          <li><a href="login.html">List Your Room</a></li>
+          <li><a href="login.html">Search Listings</a></li>
+          <li><a href="how-it-works.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Safety</h4>
+        <ul>
+          <li><a href="safety-tips.html">Safety Tips</a></li>
+          <li><a href="login.html">Report a Scam</a></li>
+          <li><a href="safety-tips.html">Danish Rent Act</a></li>
+          <li><a href="safety-tips.html">Police Fraud Reporting</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="how-it-works.html">CPR Registration</a></li>
+          <li><a href="how-it-works.html">Student Rights</a></li>
+          <li><a href="how-it-works.html">Contact Support</a></li>
+          <li><a href="how-it-works.html">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 BoligMatch · BSc Computer Science Thesis Project · Niels Brock Copenhagen</span>
+      <span class="disclaimer-note">⚠️ This platform does not verify properties. Always conduct your own checks and view
+        before paying.</span>
+    </div>
+  </footer>
+
+  <script>
+    // ═══════════════════════════════════════════════════
+    // LISTINGS DATA — Fetched from MySQL via get-listings.php
+    // ═══════════════════════════════════════════════════
+    let listings = [];
+
+    const cardColors = ['#b8ccd8', '#d4c8b8', '#b8d0c0', '#d0c8d8', '#c8b8d4', '#d8c8b8'];
+
+    // Fetch real listings from the database
+    fetch('../backend/get-listings.php?limit=6')
+      .then(function(response) { return response.json(); })
+      .then(function(data) {
+        listings = (data.listings || []).map(function(item, i) {
+          return {
+            id:          item.id,
+            type:        item.room_type === 'double' ? 'Double room' : 'Single room',
+            typeIcon:    '🏠',
+            verified:    item.owner_verified,
+            city:        item.city,
+            area:        item.area,
+            title:       item.title,
+            description: item.tags.join(' · ') || 'Room available now',
+            price:       item.rent_monthly,
+            deposit:     item.deposit_months,
+            color:       cardColors[i % cardColors.length]
+          };
+        });
+        renderHeroStats(listings);
+        renderHeroCards(listings);
+        renderListings(listings);
+      })
+      .catch(function(err) {
+        console.log('Could not load listings:', err);
+        renderHeroStats([]);
+        renderHeroCards([]);
+        renderListings([]);
+      });
+
+    // ─── Render Hero Stats ─────────────────────────────
+    function renderHeroStats(listingsData) {
+      const statsEl = document.getElementById('hero-stats');
+      const count = listingsData.length;
+      statsEl.innerHTML = `
+      <div class="stat">
+        <span class="stat-num">${count > 0 ? count + '+' : '0'}</span>
+        <span class="stat-label">Active listings</span>
+      </div>
+      <div class="stat-div"></div>
+      <div class="stat">
+        <span class="stat-num">3 cities</span>
+        <span class="stat-label">Covered in Denmark</span>
+      </div>
+      <div class="stat-div"></div>
+      <div class="stat">
+        <span class="stat-num">Free</span>
+        <span class="stat-label">No subscription fees</span>
+      </div>
+    `;
+    }
+
+    // ─── Render Hero Floating Cards ────────────────────
+    function renderHeroCards(listingsData) {
+      const heroCards = document.getElementById('hero-cards');
+
+      if (listingsData.length === 0) {
+        // Show empty placeholder cards (skeleton/ghost cards)
+        heroCards.innerHTML = `
+        <div class="listing-card skeleton-card">
+          <div class="card-img skeleton-img"></div>
+          <div class="card-body">
+            <div class="skeleton-line short"></div>
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line-row">
+              <div class="skeleton-line tiny"></div>
+              <div class="skeleton-line tiny"></div>
+            </div>
+          </div>
+        </div>
+        <div class="listing-card skeleton-card">
+          <div class="card-img skeleton-img"></div>
+          <div class="card-body">
+            <div class="skeleton-line short"></div>
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line-row">
+              <div class="skeleton-line tiny"></div>
+              <div class="skeleton-line tiny"></div>
+            </div>
+          </div>
+        </div>
+        <div class="listing-card skeleton-card">
+          <div class="card-img skeleton-img"></div>
+          <div class="card-body">
+            <div class="skeleton-line short"></div>
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line-row">
+              <div class="skeleton-line tiny"></div>
+              <div class="skeleton-line tiny"></div>
+            </div>
+          </div>
+        </div>
+        <div class="listing-card skeleton-card">
+          <div class="card-img skeleton-img"></div>
+          <div class="card-body">
+            <div class="skeleton-line short"></div>
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line-row">
+              <div class="skeleton-line tiny"></div>
+              <div class="skeleton-line tiny"></div>
+            </div>
+          </div>
+        </div>
+      `;
+        return;
+      }
+
+      // Show up to 4 real listing cards in the hero
+      const imgColors = ['#c8d8e8', '#d4c8b8', '#b8d0c0', '#d0c8d8'];
+      const heroListings = listingsData.slice(0, 4);
+      heroCards.innerHTML = heroListings.map((listing, i) => `
+      <div class="listing-card">
+        ${listing.cover_photo
+          ? `<div class="card-img" style="overflow:hidden;"><img src="${listing.cover_photo}" alt="${listing.title}" style="width:100%;height:100%;object-fit:cover;" loading="lazy"/></div>`
+          : `<div class="card-img" style="background-color: ${listing.color || imgColors[i % 4]};"></div>`
+        }
+        <div class="card-body">
+          <div class="card-city">${listing.city} · ${listing.area}</div>
+          <div class="card-title">${listing.title}</div>
+          <div class="card-meta">
+            <div class="card-price">DKK ${listing.price.toLocaleString()}<span>/mo</span></div>
+            <div class="card-deposit">${listing.deposit} mo. deposit</div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+    }
+
+    // ─── Render Main Listings Grid ─────────────────────
+    function renderListings(listingsData) {
+      const grid = document.getElementById('listings-grid');
+      const emptyState = document.getElementById('empty-state');
+      const viewAllLink = document.getElementById('view-all-link');
+
+      if (listingsData.length === 0) {
+        // No listings — show empty state, hide grid
+        grid.style.display = 'none';
+        emptyState.style.display = 'flex';
+        viewAllLink.style.display = 'none';
+        return;
+      }
+
+      // Has listings — show grid, hide empty state
+      grid.style.display = 'grid';
+      emptyState.style.display = 'none';
+      viewAllLink.style.display = 'flex';
+
+      const roomColors = ['r1', 'r2', 'r3'];
+      grid.innerHTML = listingsData.slice(0, 6).map((listing, i) => `
+      <div class="big-card">
+        <div class="big-card-img ${roomColors[i % 3]}" style="overflow:hidden;">
+          <div class="card-badge">${listing.typeIcon} ${listing.type}</div>
+          ${listing.verified ? '<div class="card-verified">✓ Email verified</div>' : ''}
+          ${listing.cover_photo
+            ? `<img src="${listing.cover_photo}" alt="${listing.title}" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy"/>`
+            : `<svg class="room-svg" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                <rect width="300" height="200" fill="${listing.color || '#b8ccd8'}"/>
+                <rect x="40" y="60" width="220" height="110" rx="4" fill="${listing.color ? listing.color + '40' : '#dce8f0'}"/>
+                <rect x="110" y="120" width="50" height="50" fill="${listing.color ? listing.color + '80' : '#a8b8c4'}"/>
+                <rect x="60" y="80" width="60" height="50" fill="${listing.color ? listing.color + '60' : '#c8d8e0'}"/>
+                <rect x="180" y="80" width="60" height="50" fill="${listing.color ? listing.color + '60' : '#c8d8e0'}"/>
+                <rect x="0" y="170" width="300" height="30" fill="${listing.color ? listing.color + 'a0' : '#8098a8'}"/>
+              </svg>`
+          }
+        </div>
+        <div class="big-card-body">
+          <div class="big-card-city">📍 ${listing.city} · ${listing.area}</div>
+          <div class="big-card-title">${listing.title}</div>
+          <div class="big-card-desc">${listing.description}</div>
+          <div class="big-card-footer">
+            <div class="big-price">DKK ${listing.price.toLocaleString()} <small>/month</small></div>
+            <div class="deposit-tag">Deposit: ${listing.deposit} month${listing.deposit > 1 ? 's' : ''}</div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+      // Re-apply scroll animation to new cards
+      document.querySelectorAll('.big-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+      });
+    }
+
+    // ─── Initialize ────────────────────────────────────
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Intersection observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.how-step, .safety-feat').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+
+    // Rendering is handled inside the fetch() callback above
+  </script>
+</body>
+
+</html>

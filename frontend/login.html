@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — BoligMatch</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../css/login.css" />
+</head>
+
+<body>
+
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+    <div class="circle-bg c1"></div>
+    <div class="circle-bg c2"></div>
+
+    <a href="index.html" class="panel-logo">Bolig<span>Match</span></a>
+
+    <div class="panel-hero">
+      <h2>Welcome back to <em>BoligMatch</em></h2>
+      <p>Connecting international students with affordable, flexible room rentals across Denmark — no waiting lists, no
+        hidden fees.</p>
+    </div>
+
+    <div class="login-stats">
+      <div class="login-stat accent">
+        <div class="num">0</div>
+        <div class="lbl">Active room listings</div>
+      </div>
+      <div class="login-stat">
+        <div class="num">Free</div>
+        <div class="lbl">No subscription fees</div>
+      </div>
+      <div class="login-stat">
+        <div class="num">3</div>
+        <div class="lbl">Cities in Denmark</div>
+      </div>
+      <div class="login-stat">
+        <div class="num">1 mo.</div>
+        <div class="lbl">Typical deposit required</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+    <div class="top-bar">
+      <a href="index.html" class="back-link">← Back to BoligMatch</a>
+      <a href="../backend/admin-login.php" class="admin-login-btn">
+        <span class="admin-dot"></span>
+        Admin Login
+      </a>
+    </div>
+
+    <div class="form-header">
+      <h1>Sign in to your account</h1>
+      <p>Don't have an account? <a href="register.html">Create one free →</a></p>
+    </div>
+
+    <!-- Role Tabs -->
+    <div class="role-tabs">
+      <button class="role-tab active" onclick="setRole('student', this)">🎓 Student</button>
+      <button class="role-tab" onclick="setRole('owner', this)">🏠 Room Owner</button>
+    </div>
+
+    <!-- Alert -->
+    <div class="alert error" id="alert-box">
+      ⚠️ <span id="alert-text">Invalid email or password. Please try again.</span>
+    </div>
+
+    <form id="login-form" method="POST" action="../backend/login.php" onsubmit="return handleLogin(event)" novalidate>
+      <input type="hidden" name="role" id="role-val" value="student" />
+
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" name="email" id="login-email" placeholder="your@email.com" required />
+      </div>
+
+      <div class="form-group">
+        <div class="form-label-row">
+          <label>Password</label>
+          <a href="#" class="forgot-link" onclick="showForgot(event)">Forgot password?</a>
+        </div>
+        <div class="pw-wrap">
+          <input type="password" name="password" id="login-pw" placeholder="Your password" required />
+          <span class="pw-eye" onclick="togglePw()">👁️</span>
+        </div>
+      </div>
+
+      <!-- CAPTCHA — question loaded from backend/captcha.php via JavaScript -->
+      <div class="form-group">
+        <label id="captcha-label">🔒 Security Check: Loading...</label>
+        <input type="number" name="captcha" id="captcha-input" placeholder="Enter your answer" required
+               style="width:100%;padding:12px 14px;border:1.5px solid #e5e0d8;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;" />
+      </div>
+
+      <div class="remember-row">
+        <input type="checkbox" id="remember" name="remember" />
+        <label for="remember">Keep me signed in for 30 days</label>
+      </div>
+
+      <button type="submit" class="submit-btn" id="login-btn">Sign In →</button>
+
+      <div class="divider">new here?</div>
+
+      <div class="register-link">
+        <a href="register.html">Create a free account — it takes 2 minutes</a>
+      </div>
+    </form>
+
+    <div class="safety-tip">
+      <span>🔒</span>
+      <p><strong>Security reminder:</strong> BoligMatch will never ask for your password by email or phone. Always
+        verify listings before making any payments. <a href="safety-tips.html" style="color:#1a7f6e">Read our safety tips →</a></p>
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div id="modal-overlay"
+    style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:50; align-items:center; justify-content:center;">
+    <div
+      style="background:white; border-radius:16px; padding:40px; max-width:420px; width:90%;">
+      <h3 style="font-family:'Playfair Display',serif; font-size:1.4rem; color:#0d1b2a; margin-bottom:8px;">Reset
+        your password</h3>
+      <p style="color:#6b7280; font-size:0.87rem; margin-bottom:24px; line-height:1.6;">Enter your email
+        address and we'll generate a reset link for you.</p>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="reset-email" placeholder="your@email.com" />
+      </div>
+      <div style="display:flex; gap:12px; margin-top:8px;">
+        <button onclick="closeModal()"
+          style="flex:1; padding:13px; border:1.5px solid #e5e0d8; border-radius:8px; background:white; font-family:'DM Sans',sans-serif; font-size:0.9rem; cursor:pointer; color:#6b7280;">Cancel</button>
+        <button onclick="sendReset()"
+          style="flex:2; padding:13px; border:none; border-radius:8px; background:#0d1b2a; color:white; font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:600; cursor:pointer;"
+          id="reset-btn">Send Reset Link</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ── Load CAPTCHA question from backend ────────────────────
+    function loadCaptcha() {
+      fetch('../backend/captcha.php')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          document.getElementById('captcha-label').textContent = '🔒 Security Check: ' + data.question;
+        })
+        .catch(function() {
+          document.getElementById('captcha-label').textContent = '🔒 Security Check: Could not load — refresh page';
+        });
+    }
+    loadCaptcha();
+
+    // ── Role tabs ─────────────────────────────────────────────
+    function setRole(role, btn) {
+      document.getElementById('role-val').value = role;
+      document.querySelectorAll('.role-tab').forEach(function(t) { t.classList.remove('active'); });
+      btn.classList.add('active');
+    }
+
+    // ── Password toggle ───────────────────────────────────────
+    function togglePw() {
+      var input = document.getElementById('login-pw');
+      var eye = document.querySelector('.pw-eye');
+      var isPassword = input.type === 'password';
+      input.type = isPassword ? 'text' : 'password';
+      eye.textContent = isPassword ? '🙈' : '👁️';
+    }
+
+    // ── Form validation ───────────────────────────────────────
+    function handleLogin(e) {
+      var email = document.getElementById('login-email').value;
+      var pw = document.getElementById('login-pw').value;
+      var captcha = document.getElementById('captcha-input').value;
+      var btn = document.getElementById('login-btn');
+
+      if (!email || !pw) {
+        e.preventDefault();
+        showAlert('Please enter your email and password.');
+        return false;
+      }
+      if (!captcha) {
+        e.preventDefault();
+        showAlert('Please answer the security question.');
+        return false;
+      }
+
+      btn.textContent = 'Signing in...';
+      btn.disabled = true;
+      btn.style.opacity = '0.7';
+      return true;
+    }
+
+    // ── Alert ─────────────────────────────────────────────────
+    function showAlert(msg) {
+      var box = document.getElementById('alert-box');
+      document.getElementById('alert-text').textContent = msg;
+      box.style.display = 'flex';
+      setTimeout(function() { box.style.display = 'none'; }, 5000);
+    }
+
+    // ── Forgot password ───────────────────────────────────────
+    function showForgot(e) {
+      e.preventDefault();
+      document.getElementById('modal-overlay').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('modal-overlay').style.display = 'none';
+    }
+    function sendReset() {
+      var email = document.getElementById('reset-email').value;
+      var btn = document.getElementById('reset-btn');
+      if (!email) { alert('Please enter your email address.'); return; }
+
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      var formData = new FormData();
+      formData.append('email', email);
+
+      fetch('../backend/forgot-password.php', { method: 'POST', body: formData })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.success && data.reset_url) {
+          var modal = document.getElementById('modal-overlay').querySelector('div');
+          modal.innerHTML = '<h3 style="font-family:Playfair Display,serif;font-size:1.4rem;color:#0d1b2a;margin-bottom:8px;">Reset link generated</h3>'
+            + '<p style="color:#6b7280;font-size:0.82rem;margin-bottom:12px;line-height:1.6;">In production this would be emailed. For the prototype, click below:</p>'
+            + '<div style="background:rgba(26,127,110,.06);border:2px dashed #1a7f6e;border-radius:8px;padding:14px;margin-bottom:16px;word-break:break-all;">'
+            + '<a href="' + data.reset_url + '" style="color:#1a7f6e;font-size:0.82rem;font-weight:600;">' + data.reset_url + '</a></div>'
+            + '<button onclick="closeModal()" style="width:100%;padding:13px;border:none;border-radius:8px;background:#0d1b2a;color:white;font-family:DM Sans,sans-serif;font-size:0.9rem;font-weight:600;cursor:pointer;">Close</button>';
+        } else {
+          btn.textContent = 'Send Reset Link'; btn.disabled = false;
+          alert(data.message || 'Something went wrong.');
+        }
+      })
+      .catch(function() {
+        btn.textContent = 'Send Reset Link'; btn.disabled = false;
+        alert('Could not connect. Is XAMPP running?');
+      });
+    }
+
+    // ── Show errors from URL params ───────────────────────────
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      if (params.has('error')) {
+        var messages = {
+          'invalid': 'Incorrect email or password. Please try again.',
+          'missing': 'Please enter your email address and password.',
+          'locked': 'Too many failed attempts. Please wait before trying again.',
+          'banned': 'Your account has been suspended. Please contact support.',
+          'wrong_role': 'Please select the correct role tab above and try again.',
+          'invalid_request': 'Invalid request. Please try again.',
+          'captcha': 'Incorrect security answer. Please try again.'
+        };
+        showAlert(messages[params.get('error')] || 'Something went wrong. Please try again.');
+        // Reload CAPTCHA with new question after error
+        loadCaptcha();
+      }
+    })();
+  </script>
+</body>
+
+</html>

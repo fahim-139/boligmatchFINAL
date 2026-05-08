@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How It Works — BoligMatch</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0d1b2a;
+      --slate: #1b2d45;
+      --teal: #1a7f6e;
+      --teal-light: #22a08a;
+      --teal-pale: rgba(26, 127, 110, 0.08);
+      --teal-mid: rgba(26, 127, 110, 0.15);
+      --cream: #f7f3ee;
+      --warm-white: #fdfaf6;
+      --gold: #c9a84c;
+      --gold-pale: rgba(201, 168, 76, 0.10);
+      --text: #0d1b2a;
+      --text-muted: #6b7280;
+      --border: #e5e0d8;
+      --red: #dc2626;
+      --green: #16a34a;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--warm-white);
+      color: var(--text);
+    }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    nav {
+      background: var(--navy);
+      height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: white;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--teal-light);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-link {
+      color: rgba(255, 255, 255, .6);
+      text-decoration: none;
+      font-size: .86rem;
+      padding: 7px 13px;
+      border-radius: 7px;
+      transition: all .2s;
+    }
+
+    .nav-link:hover {
+      color: white;
+      background: rgba(255, 255, 255, .07);
+    }
+
+    .nav-link.active {
+      color: var(--teal-light);
+    }
+
+    .nav-btn {
+      padding: 8px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: .86rem;
+      font-weight: 600;
+      transition: background .2s;
+    }
+
+    .nav-btn.solid {
+      background: var(--teal);
+      color: white;
+    }
+
+    .nav-btn.solid:hover {
+      background: var(--teal-light);
+    }
+
+    .nav-btn.ghost {
+      background: rgba(255, 255, 255, .08);
+      color: rgba(255, 255, 255, .8);
+      border: 1px solid rgba(255, 255, 255, .15);
+      margin-left: 4px;
+    }
+
+    .nav-btn.ghost:hover {
+      background: rgba(255, 255, 255, .14);
+    }
+
+    /* ── HERO ────────────────────────────────────────── */
+    .hero {
+      background: var(--navy);
+      padding: 72px 48px 80px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(26, 127, 110, .2) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* Decorative grid lines */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, .03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: var(--teal-light);
+      background: rgba(26, 127, 110, .15);
+      border: 1px solid rgba(26, 127, 110, .3);
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 22px;
+    }
+
+    .hero-h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: white;
+      line-height: 1.1;
+      letter-spacing: -.5px;
+      margin-bottom: 18px;
+    }
+
+    .hero-h1 em {
+      font-style: normal;
+      color: var(--teal-light);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, .55);
+      line-height: 1.75;
+      max-width: 540px;
+      margin: 0 auto 32px;
+    }
+
+    .hero-tabs {
+      display: inline-flex;
+      gap: 0;
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 10px;
+      padding: 4px;
+    }
+
+    .hero-tab {
+      padding: 10px 28px;
+      border-radius: 7px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      border: none;
+      color: rgba(255, 255, 255, .5);
+      background: transparent;
+    }
+
+    .hero-tab.active {
+      background: white;
+      color: var(--navy);
+    }
+
+    /* ── SECTION WRAPPER ─────────────────────────────── */
+    .page-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px 80px;
+    }
+
+    /* ── ROLE SECTIONS ───────────────────────────────── */
+    .role-section {
+      padding: 64px 0;
+    }
+
+    .role-section+.role-section {
+      border-top: 1px solid var(--border);
+    }
+
+    .rs-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .rs-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 14px;
+    }
+
+    .rs-pill.student {
+      background: var(--teal-pale);
+      color: var(--teal);
+      border: 1px solid rgba(26, 127, 110, .2);
+    }
+
+    .rs-pill.owner {
+      background: var(--gold-pale);
+      color: #7c5a00;
+      border: 1px solid rgba(201, 168, 76, .25);
+    }
+
+    .rs-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .rs-sub {
+      font-size: .92rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ── STEPS ───────────────────────────────────────── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+
+    /* connecting line */
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: calc(12.5%);
+      right: calc(12.5%);
+      height: 2px;
+      background: linear-gradient(90deg, var(--teal) 0%, rgba(26, 127, 110, .2) 100%);
+      z-index: 0;
+    }
+
+    .step {
+      text-align: center;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-num-wrap {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      position: relative;
+    }
+
+    .step-num-wrap.student-step {
+      background: white;
+      border: 2px solid var(--teal);
+      box-shadow: 0 0 0 6px rgba(26, 127, 110, .08);
+    }
+
+    .step-num-wrap.owner-step {
+      background: white;
+      border: 2px solid var(--gold);
+      box-shadow: 0 0 0 6px rgba(201, 168, 76, .08);
+    }
+
+    .step-icon {
+      font-size: 1.6rem;
+    }
+
+    .step-num {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      font-size: .65rem;
+      font-weight: 700;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--warm-white);
+    }
+
+    .step-num.s {
+      background: var(--teal);
+    }
+
+    .step-num.o {
+      background: var(--gold);
+    }
+
+    .step-title {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .step-desc {
+      font-size: .81rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ── DETAIL CARDS ────────────────────────────────── */
+    .detail-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 52px;
+    }
+
+    .detail-card {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 26px 28px;
+      transition: box-shadow .2s, border-color .2s;
+    }
+
+    .detail-card:hover {
+      box-shadow: 0 6px 24px rgba(13, 27, 42, .07);
+      border-color: var(--teal);
+    }
+
+    .dc-icon {
+      font-size: 1.8rem;
+      margin-bottom: 14px;
+    }
+
+    .dc-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .dc-text {
+      font-size: .83rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ── COMPARISON TABLE ────────────────────────────── */
+    .comparison {
+      padding: 64px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .comparison-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--navy);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .comparison-sub {
+      text-align: center;
+      font-size: .88rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1.5px solid var(--border);
+    }
+
+    .comp-table th {
+      padding: 14px 20px;
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .comp-table th:first-child {
+      text-align: left;
+      background: var(--cream);
+      color: var(--text-muted);
+    }
+
+    .comp-table th.bolig {
+      background: var(--navy);
+      color: var(--teal-light);
+    }
+
+    .comp-table th.other {
+      background: #f9fafb;
+      color: var(--text-muted);
+    }
+
+    .comp-table td {
+      padding: 13px 20px;
+      font-size: .84rem;
+      border-bottom: 1px solid rgba(229, 224, 216, .5);
+    }
+
+    .comp-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .comp-table td:first-child {
+      font-weight: 600;
+      color: var(--navy);
+      background: var(--cream);
+    }
+
+    .comp-table td.yes {
+      color: var(--green);
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .comp-table td.no {
+      color: var(--red);
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .comp-table td.mid {
+      color: var(--gold);
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .comp-table tr:hover td {
+      background: rgba(26, 127, 110, .02);
+    }
+
+    .comp-table tr:hover td:first-child {
+      background: var(--cream);
+    }
+
+    /* ── FAQ ─────────────────────────────────────────── */
+    .faq-section {
+      padding: 64px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--navy);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .faq-item {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 11px;
+      overflow: hidden;
+    }
+
+    .faq-q {
+      width: 100%;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--navy);
+      text-align: left;
+      transition: background .15s;
+      gap: 12px;
+    }
+
+    .faq-q:hover {
+      background: var(--cream);
+    }
+
+    .faq-q .arrow {
+      font-size: .75rem;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      transition: transform .25s;
+    }
+
+    .faq-item.open .faq-q {
+      background: var(--teal-pale);
+      color: var(--teal);
+    }
+
+    .faq-item.open .arrow {
+      transform: rotate(180deg);
+      color: var(--teal);
+    }
+
+    .faq-a {
+      display: none;
+      padding: 0 20px 16px;
+      font-size: .82rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-item.open .faq-a {
+      display: block;
+    }
+
+    /* ── CTA BANNER ──────────────────────────────────── */
+    .cta-section {
+      background: var(--navy);
+      border-radius: 18px;
+      padding: 56px 60px;
+      text-align: center;
+      margin: 64px 0 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(26, 127, 110, .25) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .cta-section * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .cta-sub {
+      font-size: .92rem;
+      color: rgba(255, 255, 255, .55);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn-p {
+      padding: 13px 30px;
+      background: var(--teal);
+      color: white;
+      border-radius: 9px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .92rem;
+      transition: background .2s;
+    }
+
+    .cta-btn-p:hover {
+      background: var(--teal-light);
+    }
+
+    .cta-btn-s {
+      padding: 13px 30px;
+      background: rgba(255, 255, 255, .08);
+      color: rgba(255, 255, 255, .8);
+      border: 1.5px solid rgba(255, 255, 255, .2);
+      border-radius: 9px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: .92rem;
+      transition: all .2s;
+    }
+
+    .cta-btn-s:hover {
+      background: rgba(255, 255, 255, .14);
+      color: white;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      background: var(--navy);
+      margin-top: 64px;
+      padding: 32px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: white;
+    }
+
+    .footer-logo span {
+      color: var(--teal-light);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      font-size: .78rem;
+      color: rgba(255, 255, 255, .4);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .footer-links a:hover {
+      color: rgba(255, 255, 255, .8);
+    }
+
+    /* ── ANIMATIONS ──────────────────────────────────── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .step {
+      animation: fadeUp .5s ease both;
+    }
+
+    .step:nth-child(1) {
+      animation-delay: .05s;
+    }
+
+    .step:nth-child(2) {
+      animation-delay: .12s;
+    }
+
+    .step:nth-child(3) {
+      animation-delay: .19s;
+    }
+
+    .step:nth-child(4) {
+      animation-delay: .26s;
+    }
+
+    .detail-card {
+      animation: fadeUp .4s ease both;
+    }
+
+    .detail-card:nth-child(1) {
+      animation-delay: .08s;
+    }
+
+    .detail-card:nth-child(2) {
+      animation-delay: .14s;
+    }
+
+    .detail-card:nth-child(3) {
+      animation-delay: .20s;
+    }
+
+    .detail-card:nth-child(4) {
+      animation-delay: .26s;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="logo">Bolig<span>Match</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="login.html" class="nav-link">Browse Rooms</a>
+      <a href="how-it-works.html" class="nav-link active">How It Works</a>
+      <a href="safety-tips.html" class="nav-link">Safety Tips</a>
+      <a href="login.html" class="nav-btn ghost">Sign In</a>
+      <a href="register.html" class="nav-btn solid">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">🗺️ Simple process</div>
+      <h1 class="hero-h1">How <em>BoligMatch</em><br />works</h1>
+      <p class="hero-sub">A peer-to-peer platform connecting international students with room owners in Denmark. No
+        waiting lists, no subscriptions, no hidden costs.</p>
+      <div class="hero-tabs">
+        <button class="hero-tab active" onclick="showRole('student', this)">🎓 I'm a Student</button>
+        <button class="hero-tab" onclick="showRole('owner',   this)">🏠 I'm an Owner</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-body">
+
+    <!-- ═══ STUDENT STEPS ═══ -->
+    <section class="role-section" id="section-student">
+      <div class="rs-header">
+        <div class="rs-pill student">🎓 For International Students</div>
+        <div class="rs-title">Find a room in four steps</div>
+        <div class="rs-sub">BoligMatch is designed for students arriving in Denmark — no CPR number required to start,
+          no subscription fee, no waiting list.</div>
+      </div>
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num-wrap student-step">
+            <span class="step-icon">✉️</span>
+            <span class="step-num s">1</span>
+          </div>
+          <div class="step-title">Create a free account</div>
+          <div class="step-desc">Register with your email. Choose the "Student" role. Verify your email in one click. No
+            subscription required — ever.</div>
+        </div>
+
+        <div class="step">
+          <div class="step-num-wrap student-step">
+            <span class="step-icon">🔍</span>
+            <span class="step-num s">2</span>
+          </div>
+          <div class="step-title">Search & filter rooms</div>
+          <div class="step-desc">Filter by city, maximum monthly rent, and maximum deposit. See only rooms you can
+            actually afford — unique to BoligMatch.</div>
+        </div>
+
+        <div class="step">
+          <div class="step-num-wrap student-step">
+            <span class="step-icon">💬</span>
+            <span class="step-num s">3</span>
+          </div>
+          <div class="step-title">Message the owner directly</div>
+          <div class="step-desc">Send a message through the platform. No phone numbers or external apps needed. All
+            conversations are stored safely.</div>
+        </div>
+
+        <div class="step">
+          <div class="step-num-wrap student-step">
+            <span class="step-icon">🏠</span>
+            <span class="step-num s">4</span>
+          </div>
+          <div class="step-title">View, sign, move in</div>
+          <div class="step-desc">Arrange an in-person viewing. Sign a written contract. Pay the deposit only after
+            viewing. Then move in on your terms.</div>
+        </div>
+
+      </div>
+
+      <!-- Detail cards -->
+      <div class="detail-cards">
+        <div class="detail-card">
+          <div class="dc-icon">💰</div>
+          <div class="dc-title">Filter by deposit amount</div>
+          <div class="dc-text">Standard Danish apartments require up to 3 months deposit plus prepaid rent — often DKK
+            15,000–25,000 upfront. BoligMatch lets you filter listings to only show rooms with 1-month deposits, making
+            it genuinely accessible for students arriving with limited savings.</div>
+        </div>
+        <div class="detail-card">
+          <div class="dc-icon">🛡️</div>
+          <div class="dc-title">Built-in scam protection</div>
+          <div class="dc-text">Every message is monitored for known scam phrases (Western Union, wire transfer, gift
+            cards). Suspicious listings are flagged for admin review. Safety warnings appear throughout the messaging
+            flow to keep you informed and protected.</div>
+        </div>
+        <div class="detail-card">
+          <div class="dc-icon">📍</div>
+          <div class="dc-title">Cities covered</div>
+          <div class="dc-text">Listings currently cover Copenhagen, Aarhus, Aalborg, and Odense — Denmark's four major
+            student cities. Each city has local neighbourhoods listed, so you can search close to your campus or
+            university.</div>
+        </div>
+        <div class="detail-card">
+          <div class="dc-icon">❤️</div>
+          <div class="dc-title">Save rooms for later</div>
+          <div class="dc-text">Found a room you like but not ready to commit? Save it with the heart button and it will
+            appear in your personal saved rooms list. Compare multiple rooms side by side in your own time.</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══ OWNER STEPS ═══ -->
+    <section class="role-section" id="section-owner" style="display:none">
+      <div class="rs-header">
+        <div class="rs-pill owner">🏠 For Room Owners</div>
+        <div class="rs-title">List your room in four steps</div>
+        <div class="rs-sub">BoligMatch is completely free for owners. Post your room, manage enquiries, and choose your
+          tenant — all in one place.</div>
+      </div>
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num-wrap owner-step">
+            <span class="step-icon">📝</span>
+            <span class="step-num o">1</span>
+          </div>
+          <div class="step-title">Register as an owner</div>
+          <div class="step-desc">Create a free account with the "Owner" role. Verify your email address. No
+            subscription, no listing fees — ever.</div>
+        </div>
+
+        <div class="step">
+          <div class="step-num-wrap owner-step">
+            <span class="step-icon">📸</span>
+            <span class="step-num o">2</span>
+          </div>
+          <div class="step-title">Create your listing</div>
+          <div class="step-desc">Fill in the room details, upload photos (minimum 3), and set your rent and deposit
+            clearly. Go live in under 5 minutes.</div>
+        </div>
+
+        <div class="step">
+          <div class="step-num-wrap owner-step">
+            <span class="step-icon">📩</span>
+            <span class="step-num o">3</span>
+          </div>
+          <div class="step-title">Receive student enquiries</div>
+          <div class="step-desc">Students message you directly through the platform. Reply from your dashboard inbox.
+            All conversations are stored and safe.</div>
+        </div>
+
+        <div class="step">
+          <div class="step-num-wrap owner-step">
+            <span class="step-icon">🤝</span>
+            <span class="step-num o">4</span>
+          </div>
+          <div class="step-title">Choose your tenant</div>
+          <div class="step-desc">Arrange a viewing, select the right student, provide a written contract, and collect
+            the deposit. Full control at every stage.</div>
+        </div>
+
+      </div>
+
+      <!-- Detail cards -->
+      <div class="detail-cards">
+        <div class="detail-card">
+          <div class="dc-icon">🆓</div>
+          <div class="dc-title">Always free to list</div>
+          <div class="dc-text">Unlike BoligPortal which charges around DKK 399 per month, BoligMatch is and always will
+            be free for room owners. There are no listing fees, no commission, and no subscription. The platform is
+            funded as an academic project.</div>
+        </div>
+        <div class="detail-card">
+          <div class="dc-icon">🎓</div>
+          <div class="dc-title">Reach motivated students</div>
+          <div class="dc-text">BoligMatch is used specifically by international students who are actively looking for
+            rooms and ready to move quickly. Unlike Facebook groups, listings here come with filtering tools so your
+            listing reaches the right people.</div>
+        </div>
+        <div class="detail-card">
+          <div class="dc-icon">⚙️</div>
+          <div class="dc-title">Full listing management</div>
+          <div class="dc-text">Edit or remove your listing at any time from your dashboard. Mark it as unavailable when
+            rented. Listings auto-expire after 90 days so the platform stays fresh. Track how many students have viewed
+            your listing.</div>
+        </div>
+        <div class="detail-card">
+          <div class="dc-icon">📋</div>
+          <div class="dc-title">Provide a written contract</div>
+          <div class="dc-text">Under the Danish Rent Act (Lejeloven), tenants are entitled to a written rental contract.
+            BoligMatch reminds owners of this throughout the listing process. This protects both parties and ensures the
+            arrangement is legally sound.</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══ PLATFORM COMPARISON ═══ -->
+    <section class="comparison">
+      <div class="comparison-title">How BoligMatch compares</div>
+      <div class="comparison-sub">See how BoligMatch stacks up against the other ways students find housing in Denmark.
+      </div>
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th class="bolig">BoligMatch</th>
+            <th class="other">BoligPortal</th>
+            <th class="other">Facebook Groups</th>
+            <th class="other">DAB / KAB</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Free to use</td>
+            <td class="yes">✓ Free</td>
+            <td class="no">✗ ~DKK 399/mo</td>
+            <td class="yes">✓ Free</td>
+            <td class="yes">✓ Free</td>
+          </tr>
+          <tr>
+            <td>Deposit filtering</td>
+            <td class="yes">✓ Yes</td>
+            <td class="no">✗ No</td>
+            <td class="no">✗ No</td>
+            <td class="no">✗ No</td>
+          </tr>
+          <tr>
+            <td>Available immediately</td>
+            <td class="yes">✓ Yes</td>
+            <td class="yes">✓ Yes</td>
+            <td class="yes">✓ Yes</td>
+            <td class="no">✗ Waiting list</td>
+          </tr>
+          <tr>
+            <td>Scam protection</td>
+            <td class="yes">✓ Built-in</td>
+            <td class="mid">⚠ Basic</td>
+            <td class="no">✗ None</td>
+            <td class="yes">✓ Regulated</td>
+          </tr>
+          <tr>
+            <td>Student focused</td>
+            <td class="yes">✓ Purpose-built</td>
+            <td class="mid">⚠ General</td>
+            <td class="mid">⚠ General</td>
+            <td class="no">✗ CPR required</td>
+          </tr>
+          <tr>
+            <td>Verified listings</td>
+            <td class="mid">⚠ Email verify</td>
+            <td class="mid">⚠ Partial</td>
+            <td class="no">✗ None</td>
+            <td class="yes">✓ Fully vetted</td>
+          </tr>
+          <tr>
+            <td>Safe messaging</td>
+            <td class="yes">✓ On-platform</td>
+            <td class="yes">✓ Yes</td>
+            <td class="no">✗ External only</td>
+            <td class="yes">✓ Yes</td>
+          </tr>
+          <tr>
+            <td>Low deposit rooms</td>
+            <td class="yes">✓ Searchable</td>
+            <td class="no">✗ Not filtered</td>
+            <td class="mid">⚠ Unfiltered</td>
+            <td class="no">✗ Standard terms</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:.75rem;color:var(--text-muted);text-align:center;margin-top:12px">⚠ BoligMatch is an academic
+        prototype. Commercial platforms may have features not listed here. This comparison is for illustrative purposes.
+      </p>
+    </section>
+
+
+    <!-- ═══ FAQ ═══ -->
+    <section class="faq-section">
+      <div class="faq-title">Frequently asked questions</div>
+      <div class="faq-grid" id="faq">
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Do I need a CPR number to register? <span
+              class="arrow">▾</span></button>
+          <div class="faq-a">No. You can register and browse rooms without a CPR number. You will need one eventually to
+            sign a lease and register your address in Denmark, but you can start finding your room before you arrive.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Is BoligMatch really free? <span
+              class="arrow">▾</span></button>
+          <div class="faq-a">Yes — completely free for both students and room owners. There are no subscription fees, no
+            commission on rentals, and no premium tiers. BoligMatch is an academic prototype developed as a university
+            thesis project.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">How much deposit can owners legally charge? <span
+              class="arrow">▾</span></button>
+          <div class="faq-a">Under the Danish Rent Act (Lejeloven), the maximum deposit for a standard rental is 3
+            months' rent. BoligMatch shows this information clearly on every listing and prevents owners from listing
+            deposits above 3 months.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Can I message an owner before verifying my email? <span
+              class="arrow">▾</span></button>
+          <div class="faq-a">You can browse and save listings without verifying your email, but sending messages
+            requires email verification. This is a scam-prevention measure — it ensures all users on the platform have a
+            real, active email address.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">What happens if I find a scam listing? <span
+              class="arrow">▾</span></button>
+          <div class="faq-a">Every listing has a 🚩 Report button. Select the reason (scam, fake listing, suspicious
+            owner, etc.) and submit — all reports go directly to the admin panel for review. You can also report
+            suspicious messages in your inbox.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Do listings expire automatically? <span
+              class="arrow">▾</span></button>
+          <div class="faq-a">Yes. Listings automatically expire after 90 days. Owners are expected to renew or remove
+            their listing if still available. This keeps the platform fresh and prevents outdated listings from
+            misleading students.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Is BoligMatch available outside Denmark? <span
+              class="arrow">▾</span></button>
+          <div class="faq-a">Currently the platform is scoped to Denmark — specifically Copenhagen, Aarhus, Aalborg, and
+            Odense. It is an academic prototype designed for the Danish student housing market.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">I'm an owner — how many listings can I post? <span
+              class="arrow">▾</span></button>
+          <div class="faq-a">Unverified owners can post up to 2 listings. Once your email is verified, you can post up
+            to 10. This limit prevents scammers from flooding the platform with fake listings before they are detected.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <div class="cta-title">Ready to get started?</div>
+      <div class="cta-sub">Join BoligMatch today — free for students, free for owners, always.</div>
+      <div class="cta-btns">
+        <a href="register.html?role=student" class="cta-btn-p">🎓 Find a Room — Sign Up Free</a>
+        <a href="register.html?role=owner" class="cta-btn-s">🏠 List a Room →</a>
+      </div>
+    </div>
+
+  </div><!-- /page-body -->
+
+  <footer>
+    <div class="footer-logo">Bolig<span>Match</span></div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="login.html">Browse Rooms</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="safety-tips.html">Safety Tips</a>
+      <a href="login.html">Sign In</a>
+      <a href="register.html">Register</a>
+    </div>
+  </footer>
+
+  <script>
+    // ── Role tab toggle ──────────────────────────────────────
+    function showRole(role, btn) {
+      document.getElementById('section-student').style.display = role === 'student' ? '' : 'none';
+      document.getElementById('section-owner').style.display = role === 'owner' ? '' : 'none';
+      document.querySelectorAll('.hero-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    // ── FAQ accordion ────────────────────────────────────────
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      // Open clicked if it wasn't already open
+      if (!wasOpen) item.classList.add('open');
+    }
+
+    // ── Open correct section from URL hash ──────────────────
+    if (window.location.hash === '#owner') {
+      showRole('owner', document.querySelectorAll('.hero-tab')[1]);
+    }
+  </script>
+</body>
+
+</html>

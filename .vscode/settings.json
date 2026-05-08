@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/7c5dfb49-80f7-40b3-bd2f-59b298845d34/resourceGroups/boligmatch/providers/Microsoft.Web/sites/boligmatch",
+    "appService.deploySubpath": "."
+}

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register — BoligMatch</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../css/register.css">
+</head>
+
+<body>
+
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+    <a href="index.html" class="panel-logo">Bolig<span>Match</span></a>
+
+    <div class="panel-content">
+      <h2>Find your room in Denmark — without the stress</h2>
+      <p>Join international students and private room owners on Denmark's most transparent student housing platform.</p>
+    </div>
+
+    <div class="panel-features">
+      <div class="panel-feat">
+        <div class="feat-icon">💰</div>
+        <div class="feat-text">
+          <strong>Transparent Costs</strong>
+          Every listing shows deposit + monthly rent upfront. No surprises.
+        </div>
+      </div>
+      <div class="panel-feat">
+        <div class="feat-icon">🛡️</div>
+        <div class="feat-text">
+          <strong>Scam Prevention</strong>
+          Email verification, report system & in-platform messaging.
+        </div>
+      </div>
+      <div class="panel-feat">
+        <div class="feat-icon">⚡</div>
+        <div class="feat-text">
+          <strong>No Waiting Lists</strong>
+          Connect directly with room owners. Available immediately.
+        </div>
+      </div>
+      <div class="panel-feat">
+        <div class="feat-icon">🆓</div>
+        <div class="feat-text">
+          <strong>Completely Free</strong>
+          No subscription fees. BoligMatch is free for all users.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+    <div class="form-header">
+      <h1>Create your account</h1>
+      <p>Already have an account? <a href="login.html">Sign in here →</a></p>
+    </div>
+
+    <!-- Role Toggle -->
+    <div class="role-toggle">
+      <div class="role-btn active" id="btn-student" onclick="setRole('student')">
+        <span class="role-icon">🎓</span>
+        <span class="role-name">I'm a Student</span>
+        <span class="role-desc">Looking for affordable room rentals in Denmark</span>
+      </div>
+      <div class="role-btn" id="btn-owner" onclick="setRole('owner')">
+        <span class="role-icon">🏠</span>
+        <span class="role-name">I'm a Room Owner</span>
+        <span class="role-desc">I have a room to rent to students</span>
+      </div>
+    </div>
+
+    <!-- Server-side error banner -->
+    <div id="error-banner" class="error-banner" style="display:none;"></div>
+
+    <form id="register-form" method="POST" action="../backend/register.php" onsubmit="return handleSubmit(event)"
+      novalidate>
+      <input type="hidden" id="role-input" name="role" value="student" />
+
+      <!-- Name Row -->
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" name="first_name" placeholder="e.g. Md Fahim" required />
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" name="last_name" placeholder="e.g. Rahman" required />
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" name="email" id="email-input" placeholder="your@email.com" required />
+        <span class="input-hint">💡 Using your university email (.edu, .dk) builds trust with owners</span>
+      </div>
+
+      <!-- Phone -->
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" name="phone" placeholder="+45 12 34 56 78" />
+      </div>
+
+      <!-- Student-specific -->
+      <div id="student-fields">
+        <div class="form-row">
+          <div class="form-group">
+            <label>University / Institution</label>
+            <select name="university">
+              <option value="">Select your university</option>
+              <option>Niels Brock Copenhagen Business College</option>
+              <option>University of Copenhagen (KU)</option>
+              <option>Technical University of Denmark (DTU)</option>
+              <option>Aarhus University</option>
+              <option>Copenhagen Business School (CBS)</option>
+              <option>Aalborg University</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Preferred City</label>
+            <select name="city">
+              <option value="">Select city</option>
+              <option>Copenhagen</option>
+              <option>Aarhus</option>
+              <option>Aalborg</option>
+              <option>Odense</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Owner-specific -->
+      <div id="owner-fields" class="owner-fields">
+        <div class="form-group">
+          <label>Your Address (City / Area)</label>
+          <input type="text" name="address" placeholder="e.g. Nørrebro, Copenhagen" />
+        </div>
+        <div class="form-group">
+          <label>Number of Rooms Available</label>
+          <select name="rooms">
+            <option value="1">1 room</option>
+            <option value="2">2 rooms</option>
+            <option value="3+">3 or more</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label>Password</label>
+        <div class="password-wrap">
+          <input type="password" name="password" id="pw-input" placeholder="Create a strong password" required
+            oninput="checkStrength(this.value)" />
+          <span class="pw-toggle" onclick="togglePw('pw-input', this)">👁️</span>
+        </div>
+        <div class="strength-bar">
+          <div class="strength-fill" id="strength-fill"></div>
+        </div>
+        <span class="strength-label" id="strength-label">Enter a password</span>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <div class="password-wrap">
+          <input type="password" name="confirm_password" id="confirm-input" placeholder="Repeat your password"
+            required />
+          <span class="pw-toggle" onclick="togglePw('confirm-input', this)">👁️</span>
+        </div>
+      </div>
+
+      <!-- Safety Notice -->
+      <div class="safety-notice">
+        <span class="notice-icon">🛡️</span>
+        <p>After registration, we'll send a verification email. Please verify before contacting listings. <strong>Never
+            share passwords or pay anyone outside the platform.</strong></p>
+      </div>
+
+      <!-- Terms -->
+      <div class="checkbox-group">
+        <input type="checkbox" id="terms" name="terms" required />
+        <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. I
+          understand this platform is an academic prototype and I must conduct my own property checks.</label>
+      </div>
+
+      <button type="submit" class="submit-btn">Create My Account →</button>
+
+      <div class="divider">or</div>
+
+      <div class="already-link">
+        Already registered? <a href="login.html">Sign in to your account</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    let currentRole = 'student';
+
+    function setRole(role) {
+      currentRole = role;
+      document.getElementById('role-input').value = role;
+      document.getElementById('btn-student').classList.toggle('active', role === 'student');
+      document.getElementById('btn-owner').classList.toggle('active', role === 'owner');
+      document.getElementById('student-fields').style.display = role === 'student' ? 'block' : 'none';
+      document.getElementById('owner-fields').classList.toggle('visible', role === 'owner');
+    }
+
+    function togglePw(inputId, btn) {
+      const input = document.getElementById(inputId);
+      const isText = input.type === 'text';
+      input.type = isText ? 'password' : 'text';
+      btn.textContent = isText ? '👁️' : '🙈';
+    }
+
+    function checkStrength(pw) {
+      const fill = document.getElementById('strength-fill');
+      const label = document.getElementById('strength-label');
+      let score = 0;
+      if (pw.length >= 8) score++;
+      if (/[A-Z]/.test(pw)) score++;
+      if (/[0-9]/.test(pw)) score++;
+      if (/[^A-Za-z0-9]/.test(pw)) score++;
+      const levels = [
+        { pct: '0%', color: '#e5e0d8', text: 'Enter a password' },
+        { pct: '25%', color: '#dc2626', text: 'Weak' },
+        { pct: '50%', color: '#f59e0b', text: 'Fair' },
+        { pct: '75%', color: '#3b82f6', text: 'Good' },
+        { pct: '100%', color: '#16a34a', text: 'Strong ✓' },
+      ];
+      fill.style.width = levels[score].pct;
+      fill.style.background = levels[score].color;
+      label.textContent = pw.length === 0 ? 'Enter a password' : levels[score].text;
+    }
+
+    function handleSubmit(e) {
+      const form = document.getElementById('register-form');
+      const pw = document.getElementById('pw-input').value;
+      const confirm = document.getElementById('confirm-input').value;
+      const firstName = form.querySelector('[name="first_name"]').value.trim();
+      const lastName = form.querySelector('[name="last_name"]').value.trim();
+      const email = form.querySelector('[name="email"]').value.trim();
+      const terms = form.querySelector('[name="terms"]').checked;
+
+      const errors = [];
+
+      if (firstName.length < 2) errors.push('First name must be at least 2 characters.');
+      if (lastName.length < 2) errors.push('Last name must be at least 2 characters.');
+      if (!email) errors.push('Please enter your email address.');
+      if (pw.length < 8) errors.push('Password must be at least 8 characters.');
+      if (pw !== confirm) errors.push('Passwords do not match.');
+      if (!terms) errors.push('You must agree to the Terms of Service.');
+
+      if (errors.length > 0) {
+        e.preventDefault();
+        showErrors(errors);
+        return false;
+      }
+
+      // Validation passed — disable button and allow form to submit to register.php
+      const btn = form.querySelector('.submit-btn');
+      btn.textContent = 'Creating account...';
+      btn.disabled = true;
+      return true;
+    }
+
+    function showErrors(errors) {
+      const banner = document.getElementById('error-banner');
+      banner.innerHTML = errors.map(e => '<p>' + e + '</p>').join('');
+      banner.style.display = 'block';
+      banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // On page load: show server-side errors if redirected back with ?error
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('error')) {
+        const messages = {
+          'validation': 'Please correct the errors below and try again.',
+          'duplicate_email': 'An account with this email already exists.',
+          'server': 'Registration failed due to a server error. Please try again.',
+          'invalid_request': 'Invalid request. Please try again.'
+        };
+        const errorType = params.get('error');
+        const msg = messages[errorType] || 'Something went wrong. Please try again.';
+        showErrors([msg]);
+      }
+    })();
+  </script>
+</body>
+
+</html>

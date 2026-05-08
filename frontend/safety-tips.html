@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Safety Tips — BoligMatch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy:       #0d1b2a;
+      --slate:      #1b2d45;
+      --teal:       #1a7f6e;
+      --teal-light: #22a08a;
+      --teal-pale:  rgba(26,127,110,0.08);
+      --cream:      #f7f3ee;
+      --warm-white: #fdfaf6;
+      --gold:       #c9a84c;
+      --gold-pale:  rgba(201,168,76,0.10);
+      --text:       #0d1b2a;
+      --text-muted: #6b7280;
+      --border:     #e5e0d8;
+      --red:        #dc2626;
+      --red-pale:   rgba(220,38,38,0.07);
+      --red-mid:    rgba(220,38,38,0.12);
+      --green:      #16a34a;
+      --green-pale: rgba(22,163,74,0.08);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'DM Sans',sans-serif; background:var(--warm-white); color:var(--text); }
+
+    /* ── NAV ──────────────────────────────────────────── */
+    nav {
+      background:var(--navy); height:62px;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 48px; position:sticky; top:0; z-index:100;
+    }
+    .logo { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:900; color:white; text-decoration:none; }
+    .logo span { color:var(--teal-light); }
+    .nav-links { display:flex; align-items:center; gap:6px; }
+    .nav-link { color:rgba(255,255,255,.6); text-decoration:none; font-size:.86rem; padding:7px 13px; border-radius:7px; transition:all .2s; }
+    .nav-link:hover { color:white; background:rgba(255,255,255,.07); }
+    .nav-link.active { color:var(--teal-light); }
+    .nav-btn { padding:8px 18px; border-radius:8px; text-decoration:none; font-size:.86rem; font-weight:600; transition:background .2s; }
+    .nav-btn.solid { background:var(--teal); color:white; }
+    .nav-btn.solid:hover { background:var(--teal-light); }
+    .nav-btn.ghost { background:rgba(255,255,255,.08); color:rgba(255,255,255,.8); border:1px solid rgba(255,255,255,.15); margin-left:4px; }
+    .nav-btn.ghost:hover { background:rgba(255,255,255,.14); }
+
+    /* ── HERO ─────────────────────────────────────────── */
+    .hero {
+      background:var(--navy);
+      padding:68px 48px 80px;
+      position:relative; overflow:hidden;
+    }
+    .hero::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse at 20% 50%, rgba(220,38,38,.1) 0%, transparent 55%),
+                 radial-gradient(ellipse at 80% 30%, rgba(26,127,110,.12) 0%, transparent 50%);
+      pointer-events:none;
+    }
+    .hero-inner { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; position:relative; z-index:1; }
+    .hero-eyebrow { font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:2.5px; color:var(--red); margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+    .hero-h1 { font-family:'Playfair Display',serif; font-size:2.8rem; font-weight:900; color:white; line-height:1.12; letter-spacing:-.4px; margin-bottom:16px; }
+    .hero-h1 em { font-style:normal; color:var(--teal-light); }
+    .hero-sub { font-size:.95rem; color:rgba(255,255,255,.5); line-height:1.75; margin-bottom:28px; }
+    .hero-stat {
+      display:flex; align-items:center; gap:12px;
+      padding:14px 18px; border-radius:10px;
+      background:rgba(220,38,38,.1); border:1px solid rgba(220,38,38,.2);
+      font-size:.84rem; color:rgba(255,255,255,.7); line-height:1.5;
+    }
+    .hero-stat strong { color:var(--red); font-size:1.2rem; display:block; margin-bottom:2px; }
+
+    /* Safety score card on right */
+    .hero-card {
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1);
+      border-radius:16px; padding:28px 32px;
+    }
+    .hc-title { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,.35); margin-bottom:20px; }
+    .hc-item {
+      display:flex; align-items:center; gap:12px;
+      padding:11px 0; border-bottom:1px solid rgba(255,255,255,.06);
+      font-size:.84rem;
+    }
+    .hc-item:last-child { border-bottom:none; }
+    .hc-icon { font-size:1.1rem; flex-shrink:0; }
+    .hc-text { color:rgba(255,255,255,.6); flex:1; }
+    .hc-badge {
+      font-size:.65rem; font-weight:700; padding:3px 9px; border-radius:100px; flex-shrink:0;
+    }
+    .hc-badge.built-in { background:rgba(26,127,110,.2); color:var(--teal-light); }
+    .hc-badge.yours    { background:rgba(201,168,76,.2);  color:var(--gold); }
+
+    /* ── PAGE BODY ────────────────────────────────────── */
+    .page-body { max-width:1100px; margin:0 auto; padding:0 48px 80px; }
+
+    /* ── SECTION ──────────────────────────────────────── */
+    .section { padding:56px 0; border-top:1px solid var(--border); }
+    .section-eyebrow { font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--teal); margin-bottom:8px; }
+    .section-title   { font-family:'Playfair Display',serif; font-size:1.75rem; font-weight:700; color:var(--navy); margin-bottom:10px; }
+    .section-sub     { font-size:.9rem; color:var(--text-muted); line-height:1.7; max-width:560px; margin-bottom:36px; }
+
+    /* ── THE 10 GOLDEN RULES ─────────────────────────── */
+    .rules-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .rule-card {
+      display:flex; align-items:flex-start; gap:16px;
+      padding:20px 22px; border-radius:12px;
+      background:white; border:1.5px solid var(--border);
+      transition:border-color .2s, box-shadow .2s;
+    }
+    .rule-card:hover { border-color:var(--teal); box-shadow:0 4px 18px rgba(13,27,42,.07); }
+    .rule-num {
+      width:36px; height:36px; border-radius:8px; flex-shrink:0;
+      background:var(--navy); color:white;
+      font-family:'Playfair Display',serif; font-size:.9rem; font-weight:700;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .rule-title { font-size:.9rem; font-weight:700; color:var(--navy); margin-bottom:5px; }
+    .rule-text  { font-size:.8rem; color:var(--text-muted); line-height:1.6; }
+
+    /* ── RED FLAGS ────────────────────────────────────── */
+    .red-flags-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .red-flag-card {
+      padding:20px 22px; border-radius:12px;
+      background:var(--red-pale); border:1.5px solid rgba(220,38,38,.15);
+      transition:border-color .2s;
+    }
+    .red-flag-card:hover { border-color:var(--red); }
+    .rf-icon  { font-size:1.6rem; margin-bottom:12px; }
+    .rf-title { font-size:.88rem; font-weight:700; color:var(--red); margin-bottom:6px; }
+    .rf-text  { font-size:.78rem; color:var(--text-muted); line-height:1.65; }
+
+    /* ── SCAM TYPES ──────────────────────────────────── */
+    .scam-list { display:flex; flex-direction:column; gap:12px; }
+    .scam-item {
+      display:grid; grid-template-columns:52px 1fr;
+      gap:16px; align-items:start;
+      padding:20px 24px; border-radius:12px;
+      background:white; border:1.5px solid var(--border);
+    }
+    .si-icon { font-size:1.6rem; text-align:center; padding-top:2px; }
+    .si-title { font-size:.92rem; font-weight:700; color:var(--navy); margin-bottom:6px; }
+    .si-text  { font-size:.82rem; color:var(--text-muted); line-height:1.65; }
+    .si-tip {
+      display:inline-flex; align-items:center; gap:6px;
+      margin-top:8px; padding:5px 12px; border-radius:6px;
+      background:var(--green-pale); border:1px solid rgba(22,163,74,.2);
+      font-size:.74rem; font-weight:600; color:var(--green);
+    }
+
+    /* ── SAFE PAYMENT ────────────────────────────────── */
+    .payment-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    .pay-col-title {
+      font-size:.72rem; font-weight:700; text-transform:uppercase;
+      letter-spacing:1.5px; padding-bottom:12px; margin-bottom:14px;
+      border-bottom:2px solid currentColor;
+    }
+    .pay-col-title.safe   { color:var(--green); }
+    .pay-col-title.unsafe { color:var(--red); }
+    .pay-item {
+      display:flex; align-items:flex-start; gap:10px;
+      padding:12px 14px; border-radius:9px; margin-bottom:8px;
+      font-size:.83rem; line-height:1.55;
+    }
+    .pay-item.safe-item   { background:var(--green-pale); border:1px solid rgba(22,163,74,.15); color:#15803d; }
+    .pay-item.unsafe-item { background:var(--red-pale);   border:1px solid rgba(220,38,38,.15); color:var(--red); }
+
+    /* ── CHECKLIST ───────────────────────────────────── */
+    .checklist-wrap {
+      background:var(--navy); border-radius:16px;
+      padding:40px 48px; display:grid; grid-template-columns:1fr 1fr; gap:32px;
+    }
+    .cl-col-title { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,.35); margin-bottom:18px; }
+    .cl-item {
+      display:flex; align-items:flex-start; gap:12px;
+      padding:10px 0; border-bottom:1px solid rgba(255,255,255,.06);
+      font-size:.84rem; color:rgba(255,255,255,.65); line-height:1.5;
+    }
+    .cl-item:last-child { border-bottom:none; }
+    .cl-item input[type="checkbox"] { accent-color:var(--teal-light); width:16px; height:16px; flex-shrink:0; margin-top:2px; cursor:pointer; }
+    .cl-item label { cursor:pointer; }
+    .cl-item.checked label { color:var(--teal-light); text-decoration:line-through; opacity:.7; }
+    .checklist-footer {
+      grid-column:1/-1; padding-top:20px; border-top:1px solid rgba(255,255,255,.08);
+      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+    }
+    .cl-score { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; color:white; }
+    .cl-score-label { font-size:.75rem; color:rgba(255,255,255,.4); margin-top:2px; }
+    .cl-progress { flex:1; height:6px; background:rgba(255,255,255,.1); border-radius:3px; max-width:300px; }
+    .cl-progress-bar { height:100%; border-radius:3px; background:var(--teal-light); transition:width .4s; width:0%; }
+    .cl-reset { background:none; border:1px solid rgba(255,255,255,.15); color:rgba(255,255,255,.4); padding:7px 14px; border-radius:6px; font-family:'DM Sans',sans-serif; font-size:.76rem; cursor:pointer; transition:all .2s; }
+    .cl-reset:hover { border-color:rgba(255,255,255,.4); color:rgba(255,255,255,.8); }
+
+    /* ── RESOURCES ───────────────────────────────────── */
+    .resources-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .resource-card {
+      padding:22px 24px; border-radius:12px;
+      background:white; border:1.5px solid var(--border);
+      text-decoration:none; color:inherit;
+      transition:border-color .2s, box-shadow .2s;
+      display:block;
+    }
+    .resource-card:hover { border-color:var(--teal); box-shadow:0 4px 18px rgba(13,27,42,.07); }
+    .rc-icon  { font-size:1.8rem; margin-bottom:12px; }
+    .rc-name  { font-size:.9rem; font-weight:700; color:var(--navy); margin-bottom:5px; }
+    .rc-desc  { font-size:.78rem; color:var(--text-muted); line-height:1.55; margin-bottom:10px; }
+    .rc-link  { font-size:.75rem; color:var(--teal); font-weight:600; }
+
+    /* ── REPORT SECTION ──────────────────────────────── */
+    .report-section {
+      background:linear-gradient(135deg, var(--red-pale) 0%, var(--warm-white) 100%);
+      border:1.5px solid rgba(220,38,38,.15);
+      border-radius:16px; padding:40px 48px;
+      display:grid; grid-template-columns:1fr auto; gap:40px; align-items:center;
+    }
+    .rs-title { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; color:var(--navy); margin-bottom:8px; }
+    .rs-text  { font-size:.88rem; color:var(--text-muted); line-height:1.7; }
+    .rs-btn {
+      display:inline-flex; align-items:center; gap:8px; white-space:nowrap;
+      padding:14px 28px; background:var(--red); color:white;
+      border-radius:9px; font-weight:700; font-size:.9rem; text-decoration:none;
+      transition:background .2s; flex-shrink:0;
+    }
+    .rs-btn:hover { background:#b91c1c; }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer { background:var(--navy); margin-top:64px; padding:32px 48px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; }
+    .footer-logo { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:900; color:white; }
+    .footer-logo span { color:var(--teal-light); }
+    .footer-links { display:flex; gap:20px; }
+    .footer-links a { font-size:.78rem; color:rgba(255,255,255,.4); text-decoration:none; transition:color .2s; }
+    .footer-links a:hover { color:rgba(255,255,255,.8); }
+
+    /* ── ANIMATIONS ──────────────────────────────────── */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px);} to{opacity:1;transform:translateY(0);} }
+    .rule-card    { animation:fadeUp .4s ease both; }
+    .red-flag-card{ animation:fadeUp .45s ease both; }
+    .scam-item    { animation:fadeUp .4s ease both; }
+    .rule-card:nth-child(n)    { animation-delay:calc(.05s * var(--i,1)); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">Bolig<span>Match</span></a>
+  <div class="nav-links">
+    <a href="index.html"         class="nav-link">Home</a>
+    <a href="login.html"      class="nav-link">Browse Rooms</a>
+    <a href="how-it-works.html" class="nav-link">How It Works</a>
+    <a href="safety-tips.html"  class="nav-link active">Safety Tips</a>
+    <a href="login.html"        class="nav-btn ghost">Sign In</a>
+    <a href="register.html"     class="nav-btn solid">Get Started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">⚠️ Your safety matters</div>
+      <h1 class="hero-h1">Stay safe while<br/>finding your <em>home</em></h1>
+      <p class="hero-sub">Rental scams target international students specifically — they know you're under pressure, far from home, and unfamiliar with local norms. Read this page before you search.</p>
+      <div class="hero-stat">
+        <div>
+          <strong>1 in 4</strong>
+          International students in Europe have encountered a rental scam (ESU & ESN, 2023). Don't become a statistic — know the warning signs.
+        </div>
+      </div>
+    </div>
+
+    <!-- Platform protections summary -->
+    <div class="hero-card">
+      <div class="hc-title">🛡️ BoligMatch protections</div>
+      <div class="hc-item">
+        <span class="hc-icon">✉️</span>
+        <span class="hc-text">Email verification for all accounts</span>
+        <span class="hc-badge built-in">Built in</span>
+      </div>
+      <div class="hc-item">
+        <span class="hc-icon">🤖</span>
+        <span class="hc-text">Scam keyword detection in messages</span>
+        <span class="hc-badge built-in">Built in</span>
+      </div>
+      <div class="hc-item">
+        <span class="hc-icon">🚩</span>
+        <span class="hc-text">Report button on every listing</span>
+        <span class="hc-badge built-in">Built in</span>
+      </div>
+      <div class="hc-item">
+        <span class="hc-icon">👁️</span>
+        <span class="hc-text">Admin review of flagged content</span>
+        <span class="hc-badge built-in">Built in</span>
+      </div>
+      <div class="hc-item">
+        <span class="hc-icon">👤</span>
+        <span class="hc-text">Always view before paying</span>
+        <span class="hc-badge yours">Your responsibility</span>
+      </div>
+      <div class="hc-item">
+        <span class="hc-icon">📄</span>
+        <span class="hc-text">Get a written rental contract</span>
+        <span class="hc-badge yours">Your responsibility</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="page-body">
+
+  <!-- ═══ 10 GOLDEN RULES ═══ -->
+  <section class="section">
+    <div class="section-eyebrow">The basics</div>
+    <div class="section-title">10 golden rules of safe renting</div>
+    <div class="section-sub">Follow these rules every time, without exception — no matter how urgent or good a deal seems.</div>
+
+    <div class="rules-grid">
+
+      <div class="rule-card" style="--i:1">
+        <div class="rule-num">1</div>
+        <div>
+          <div class="rule-title">Never pay before viewing</div>
+          <div class="rule-text">This is the single most important rule. No legitimate landlord will ask for a deposit, first month's rent, or any payment before you have physically visited the property and met them in person.</div>
+        </div>
+      </div>
+
+      <div class="rule-card" style="--i:2">
+        <div class="rule-num">2</div>
+        <div>
+          <div class="rule-title">Always get a written contract</div>
+          <div class="rule-text">Under the Danish Rent Act (Lejeloven), you are legally entitled to a written rental contract. Never move in or pay a deposit without one. A verbal agreement offers you almost no legal protection.</div>
+        </div>
+      </div>
+
+      <div class="rule-card" style="--i:3">
+        <div class="rule-num">3</div>
+        <div>
+          <div class="rule-title">Keep communication on BoligMatch</div>
+          <div class="rule-text">Be cautious if an owner immediately pushes you to WhatsApp or email before you've had any meaningful conversation. Keeping messages on-platform means there is a record if something goes wrong.</div>
+        </div>
+      </div>
+
+      <div class="rule-card" style="--i:4">
+        <div class="rule-num">4</div>
+        <div>
+          <div class="rule-title">Never pay with gift cards or crypto</div>
+          <div class="rule-text">No legitimate landlord in Denmark will ask for payment via gift cards (Google Play, Amazon, iTunes), cryptocurrency, or any payment method that is irreversible and untraceable.</div>
+        </div>
+      </div>
+
+      <div class="rule-card" style="--i:5">
+        <div class="rule-num">5</div>
+        <div>
+          <div class="rule-title">Be suspicious of prices far below market</div>
+          <div class="rule-text">A 20m² room in central Copenhagen for DKK 2,000/month does not exist. Scammers use unrealistically low prices to attract desperate students. If it seems too good to be true, it is.</div>
+        </div>
+      </div>
+
+      <div class="rule-card" style="--i:6">
+        <div class="rule-num">6</div>
+        <div>
+          <div class="rule-title">Never pay to view a property</div>
+          <div class="rule-text">Viewing a rental property is always free. If an owner asks you to pay a "viewing fee", a "holding deposit", or an "administration fee" before you have seen the room — this is a scam.</div>
+        </div>
+      </div>
+
+      <div class="rule-card" style="--i:7">
+        <div class="rule-num">7</div>
+        <div>
+          <div class="rule-title">Verify the landlord's identity</div>
+          <div class="rule-text">Ask to see a utility bill or official document proving the owner lives at or owns the property. A legitimate landlord will be happy to provide this. Be wary of anyone who refuses or makes excuses.</div>
+        </div>
+      </div>
+
+      <div class="rule-card" style="--i:8">
+        <div class="rule-num">8</div>
+        <div>
+          <div class="rule-title">Do a reverse image search on photos</div>
+          <div class="rule-text">Scammers steal photos from other websites. Right-click any listing photo and choose "Search image". If the same photo appears on multiple different listings or real estate sites with different addresses, it is fake.</div>
+        </div>
+      </div>
+
+      <div class="rule-card" style="--i:9">
+        <div class="rule-num">9</div>
+        <div>
+          <div class="rule-title">Be wary of "I'm abroad" excuses</div>
+          <div class="rule-text">A very common scam involves a landlord claiming they are abroad for work, a military deployment, or a family emergency — and therefore cannot show you the property or meet in person. This is a classic red flag.</div>
+        </div>
+      </div>
+
+      <div class="rule-card" style="--i:10">
+        <div class="rule-num">10</div>
+        <div>
+          <div class="rule-title">Report anything suspicious</div>
+          <div class="rule-text">If a listing or message feels wrong — even if you can't explain why — use the 🚩 Report button. You may save another student from being scammed. Reports are reviewed by admins within 24 hours.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══ RED FLAGS ═══ -->
+  <section class="section">
+    <div class="section-eyebrow">Warning signs</div>
+    <div class="section-title">Rental scam red flags</div>
+    <div class="section-sub">If you see any of these in a listing or conversation, stop immediately and report the listing.</div>
+
+    <div class="red-flags-grid">
+
+      <div class="red-flag-card">
+        <div class="rf-icon">💸</div>
+        <div class="rf-title">Unusually low price</div>
+        <div class="rf-text">Rent 40–60% below similar listings in the same area. Scammers price low to attract many victims quickly.</div>
+      </div>
+
+      <div class="red-flag-card">
+        <div class="rf-icon">✈️</div>
+        <div class="rf-title">"I'm currently abroad"</div>
+        <div class="rf-text">Owner claims to be in another country for work, military deployment, or missionary work and can only send the keys by mail after payment.</div>
+      </div>
+
+      <div class="red-flag-card">
+        <div class="rf-icon">⚡</div>
+        <div class="rf-title">Pressure to decide fast</div>
+        <div class="rf-text">"Other students are interested — pay the deposit today to secure it." Urgency is a manipulation tactic to prevent you thinking clearly.</div>
+      </div>
+
+      <div class="red-flag-card">
+        <div class="rf-icon">💳</div>
+        <div class="rf-title">Unusual payment method</div>
+        <div class="rf-text">Requests for Western Union, MoneyGram, Zelle, gift cards, or cryptocurrency. These are untraceable and scammers love them.</div>
+      </div>
+
+      <div class="red-flag-card">
+        <div class="rf-icon">📷</div>
+        <div class="rf-title">Stock or stolen photos</div>
+        <div class="rf-text">Perfect magazine-quality photos, or photos that appear on multiple listings with different addresses when reverse-searched.</div>
+      </div>
+
+      <div class="red-flag-card">
+        <div class="rf-icon">📱</div>
+        <div class="rf-title">Immediate push to WhatsApp</div>
+        <div class="rf-text">Asking you to move the conversation off-platform immediately, before any meaningful exchange, to avoid leaving a record.</div>
+      </div>
+
+      <div class="red-flag-card">
+        <div class="rf-icon">🔑</div>
+        <div class="rf-title">"Keys will be mailed to you"</div>
+        <div class="rf-text">After paying, the owner claims they will post the keys to you. You pay, receive nothing, and the owner disappears.</div>
+      </div>
+
+      <div class="red-flag-card">
+        <div class="rf-icon">📄</div>
+        <div class="rf-title">No contract offered</div>
+        <div class="rf-text">Owner says a written contract "isn't necessary" or will "come later." You have no legal protection without one under Danish law.</div>
+      </div>
+
+      <div class="red-flag-card">
+        <div class="rf-icon">🌐</div>
+        <div class="rf-title">Broken or template English</div>
+        <div class="rf-text">Messages that read like automated translations, or responses that don't quite answer your specific questions and seem copy-pasted.</div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══ COMMON SCAM TYPES ═══ -->
+  <section class="section">
+    <div class="section-eyebrow">Know your enemy</div>
+    <div class="section-title">Common rental scam types</div>
+    <div class="section-sub">Understanding how scams work is the best defence against them.</div>
+
+    <div class="scam-list">
+
+      <div class="scam-item">
+        <div class="si-icon">👻</div>
+        <div>
+          <div class="si-title">The Phantom Rental</div>
+          <div class="si-text">A scammer creates a listing for a property they do not own or that does not exist. They may steal real photos from legitimate listings on other platforms. After you pay a deposit, they disappear. The property may exist but they have no connection to it.</div>
+          <span class="si-tip">✓ Always verify the owner's connection to the property before paying anything.</span>
+        </div>
+      </div>
+
+      <div class="scam-item">
+        <div class="si-icon">🔑</div>
+        <div>
+          <div class="si-title">The "Keys by Mail" Scam</div>
+          <div class="si-text">The owner says they are abroad (missionary work, military, oil rig) and will mail you the keys after you pay the deposit. They may send fake "proof of ownership" documents. You pay, they send nothing, and they disappear. This is one of the most reported scams in European student housing.</div>
+          <span class="si-tip">✓ If you cannot view in person, the answer is simply: don't pay.</span>
+        </div>
+      </div>
+
+      <div class="scam-item">
+        <div class="si-icon">👯</div>
+        <div>
+          <div class="si-title">The Multiple Victims Scam</div>
+          <div class="si-text">A scammer lists one property and collects deposits from multiple students simultaneously. Each victim thinks they have secured the room. On move-in day, multiple people arrive at the same address — none of them have a valid lease. The scammer has disappeared with all the deposits.</div>
+          <span class="si-tip">✓ A signed lease in your name protects you. If no contract is offered, walk away.</span>
+        </div>
+      </div>
+
+      <div class="scam-item">
+        <div class="si-icon">💰</div>
+        <div>
+          <div class="si-title">The Excessive Deposit Demand</div>
+          <div class="si-text">Not technically a scam, but illegal. Under Danish Rent Act (Lejeloven), the maximum combined deposit and prepaid rent is 3 months rent deposit + 3 months prepaid rent = 6 months total. Anyone demanding more is breaking Danish law.</div>
+          <span class="si-tip">✓ Know your rights: max 3 months deposit. Report excessive demands to the rent tribunal (Huslejenævnet).</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══ SAFE PAYMENT GUIDE ═══ -->
+  <section class="section">
+    <div class="section-eyebrow">Money matters</div>
+    <div class="section-title">Safe vs. unsafe payment methods</div>
+    <div class="section-sub">Always pay in a way that creates a paper trail and can be reversed if fraud occurs.</div>
+
+    <div class="payment-grid">
+      <div>
+        <div class="pay-col-title safe">✓ Safe — use these</div>
+        <div class="pay-item safe-item">✓ <span><strong>Bank transfer (wire)</strong> to a Danish bank account — creates a paper trail. Always note "deposit for [address]" in the reference.</span></div>
+        <div class="pay-item safe-item">✓ <span><strong>MobilePay</strong> (Danish bank app) — common in Denmark, traceable, and reversible in fraud cases if reported quickly.</span></div>
+        <div class="pay-item safe-item">✓ <span><strong>In-person cash</strong> — only after signing the contract and receiving a dated, signed receipt. Keep the receipt.</span></div>
+        <div class="pay-item safe-item">✓ <span><strong>Credit card</strong> where accepted — offers chargeback rights if the transaction is fraudulent.</span></div>
+      </div>
+      <div>
+        <div class="pay-col-title unsafe">✗ Unsafe — never use these</div>
+        <div class="pay-item unsafe-item">✗ <span><strong>Western Union / MoneyGram</strong> — cash-based wire services with no fraud protection. Money cannot be recovered.</span></div>
+        <div class="pay-item unsafe-item">✗ <span><strong>Gift cards</strong> (Google Play, Amazon, iTunes) — a landlord asking for gift card numbers is 100% a scam, without exception.</span></div>
+        <div class="pay-item unsafe-item">✗ <span><strong>Cryptocurrency</strong> — irreversible and untraceable. No legitimate landlord in Denmark will request this.</span></div>
+        <div class="pay-item unsafe-item">✗ <span><strong>PayPal Friends & Family</strong> — offers no buyer protection. Scammers specifically request this to prevent chargebacks.</span></div>
+        <div class="pay-item unsafe-item">✗ <span><strong>Cash without a receipt</strong> — if you pay cash, insist on a signed, dated, itemised receipt every single time.</span></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ INTERACTIVE CHECKLIST ═══ -->
+  <section class="section">
+    <div class="section-eyebrow">Before you pay anything</div>
+    <div class="section-title">Pre-payment safety checklist</div>
+    <div class="section-sub">Tick every item before handing over any money. If you can't tick them all, do not pay.</div>
+
+    <div class="checklist-wrap" id="checklist-wrap">
+
+      <div>
+        <div class="cl-col-title">🏠 About the property</div>
+        <?php $checks = []; ?>
+        <div class="cl-item" id="ci-1">
+          <input type="checkbox" id="c1" onchange="updateChecklist()"/>
+          <label for="c1">I have physically visited the property in person</label>
+        </div>
+        <div class="cl-item" id="ci-2">
+          <input type="checkbox" id="c2" onchange="updateChecklist()"/>
+          <label for="c2">The address I visited matches the listing exactly</label>
+        </div>
+        <div class="cl-item" id="ci-3">
+          <input type="checkbox" id="c3" onchange="updateChecklist()"/>
+          <label for="c3">I did a reverse image search on the listing photos</label>
+        </div>
+        <div class="cl-item" id="ci-4">
+          <input type="checkbox" id="c4" onchange="updateChecklist()"/>
+          <label for="c4">The property condition matches what was advertised</label>
+        </div>
+        <div class="cl-item" id="ci-5">
+          <input type="checkbox" id="c5" onchange="updateChecklist()"/>
+          <label for="c5">I have seen proof the owner has rights to rent this room</label>
+        </div>
+      </div>
+
+      <div>
+        <div class="cl-col-title">📄 About the agreement</div>
+        <div class="cl-item" id="ci-6">
+          <input type="checkbox" id="c6" onchange="updateChecklist()"/>
+          <label for="c6">I have a signed written rental contract in my name</label>
+        </div>
+        <div class="cl-item" id="ci-7">
+          <input type="checkbox" id="c7" onchange="updateChecklist()"/>
+          <label for="c7">The deposit is 3 months rent or less (Danish legal maximum)</label>
+        </div>
+        <div class="cl-item" id="ci-8">
+          <input type="checkbox" id="c8" onchange="updateChecklist()"/>
+          <label for="c8">I am using a safe, traceable payment method</label>
+        </div>
+        <div class="cl-item" id="ci-9">
+          <input type="checkbox" id="c9" onchange="updateChecklist()"/>
+          <label for="c9">I will receive a signed receipt for my deposit payment</label>
+        </div>
+        <div class="cl-item" id="ci-10">
+          <input type="checkbox" id="c10" onchange="updateChecklist()"/>
+          <label for="c10">I have not felt pressured or rushed at any point</label>
+        </div>
+      </div>
+
+      <div class="checklist-footer">
+        <div>
+          <div class="cl-score" id="cl-score">0 / 10</div>
+          <div class="cl-score-label" id="cl-label">Complete all items before paying</div>
+        </div>
+        <div class="cl-progress">
+          <div class="cl-progress-bar" id="cl-bar"></div>
+        </div>
+        <button class="cl-reset" onclick="resetChecklist()">Reset checklist</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ OFFICIAL RESOURCES ═══ -->
+  <section class="section">
+    <div class="section-eyebrow">Help & support</div>
+    <div class="section-title">Official resources</div>
+    <div class="section-sub">If you have been scammed, or want to know your rights, these are the official places to go.</div>
+
+    <div class="resources-grid">
+
+      <a href="https://politi.dk/en/report-a-crime" target="_blank" rel="noopener" class="resource-card">
+        <div class="rc-icon">🚔</div>
+        <div class="rc-name">Danish Police — Report Fraud</div>
+        <div class="rc-desc">Report rental fraud or financial scams directly to the Danish police online. File a report even if you are not sure it is a crime.</div>
+        <div class="rc-link">politi.dk ↗</div>
+      </a>
+
+      <a href="https://www.lejeloven.dk/en" target="_blank" rel="noopener" class="resource-card">
+        <div class="rc-icon">📜</div>
+        <div class="rc-name">Danish Rent Act — Lejeloven</div>
+        <div class="rc-desc">Official consolidated text of the Danish Rent Act in English. Know the legal maximum deposit, your rights to a contract, and tenant protections.</div>
+        <div class="rc-link">lejeloven.dk ↗</div>
+      </a>
+
+      <a href="https://ihcph.kk.dk/registration-guidance" target="_blank" rel="noopener" class="resource-card">
+        <div class="rc-icon">🏛️</div>
+        <div class="rc-name">International House Copenhagen</div>
+        <div class="rc-desc">Guidance for international arrivals including CPR registration, housing rights, and official support for students new to Denmark.</div>
+        <div class="rc-link">ihcph.kk.dk ↗</div>
+      </a>
+
+      <a href="https://studyindenmark.dk/live-in-denmark/housing" target="_blank" rel="noopener" class="resource-card">
+        <div class="rc-icon">🎓</div>
+        <div class="rc-name">Study in Denmark — Housing Guide</div>
+        <div class="rc-desc">Official guidance from the Danish Agency for Higher Education on finding housing as an international student in Denmark.</div>
+        <div class="rc-link">studyindenmark.dk ↗</div>
+      </a>
+
+      <a href="https://esu-online.org/publications/international-student-housing-report-how-are-exchange-students-navigating-the-housing-crisis/" target="_blank" rel="noopener" class="resource-card">
+        <div class="rc-icon">📊</div>
+        <div class="rc-name">ESU & ESN Housing Report 2023</div>
+        <div class="rc-desc">Research report surveying 9,000+ international students on housing challenges, scam experiences, and deposit issues across Europe.</div>
+        <div class="rc-link">esu-online.org ↗</div>
+      </a>
+
+      <a href="https://www.retsinformation.dk/eli/lta/2023/1686" target="_blank" rel="noopener" class="resource-card">
+        <div class="rc-icon">⚖️</div>
+        <div class="rc-name">Huslejenævnet — Rent Tribunal</div>
+        <div class="rc-desc">Denmark's official rent tribunal. If a landlord has charged an illegal deposit or broken your tenant rights, you can file a formal complaint here.</div>
+        <div class="rc-link">retsinformation.dk ↗</div>
+      </a>
+
+    </div>
+  </section>
+
+
+  <!-- ═══ REPORT CTA ═══ -->
+  <div class="report-section">
+    <div>
+      <div class="rs-title">🚩 Found something suspicious on BoligMatch?</div>
+      <div class="rs-text">Every listing on BoligMatch has a Report button. Use it without hesitation if something feels wrong. All reports are reviewed by admins. Your report helps protect every other student on the platform.</div>
+    </div>
+    <a href="login.html" class="rs-btn">🔍 Browse Listings Safely →</a>
+  </div>
+
+</div><!-- /page-body -->
+
+<footer>
+  <div class="footer-logo">Bolig<span>Match</span></div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="login.html">Browse Rooms</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="safety-tips.html">Safety Tips</a>
+    <a href="login.html">Sign In</a>
+    <a href="register.html">Register</a>
+  </div>
+</footer>
+
+<script>
+  // ── Interactive checklist ───────────────────────────────
+  function updateChecklist() {
+    const boxes   = document.querySelectorAll('#checklist-wrap input[type="checkbox"]');
+    const checked = Array.from(boxes).filter(b => b.checked).length;
+    const total   = boxes.length;
+    const pct     = Math.round((checked / total) * 100);
+
+    document.getElementById('cl-score').textContent = `${checked} / ${total}`;
+    document.getElementById('cl-bar').style.width   = `${pct}%`;
+
+    const labels = {
+      0:   'Complete all items before paying',
+      30:  'Keep going — don\'t skip any steps',
+      60:  'Almost there — stay thorough',
+      90:  'Nearly done — check every item',
+      100: '✅ All checks passed — proceed safely',
+    };
+    const threshold = [100,90,60,30,0].find(t => pct >= t);
+    document.getElementById('cl-label').textContent = labels[threshold];
+
+    // Update individual item styles
+    boxes.forEach(box => {
+      const item = box.closest('.cl-item');
+      item.classList.toggle('checked', box.checked);
+    });
+
+    // Change bar colour at 100%
+    document.getElementById('cl-bar').style.background =
+      pct === 100 ? '#16a34a' : 'var(--teal-light)';
+  }
+
+  function resetChecklist() {
+    document.querySelectorAll('#checklist-wrap input[type="checkbox"]')
+      .forEach(b => { b.checked = false; });
+    updateChecklist();
+  }
+</script>
+</body>
+</html>
