@@ -1,6 +1,6 @@
 # License
 
-**BoligMatch** is an academic project produced as part of a BSc (Hons) Computer Science thesis at Niels Brock Copenhagen Business College.
+**BoligMatch** is an academic project produced as part of a BSc (Hons) Computer Science thesis at De Montfort University.
 
 ---
 
@@ -26,7 +26,7 @@ You may **not**:
 
 If you reference this work in academic writing, please cite it as:
 
-> Md Fahim (2026). *BoligMatch: A Peer-to-Peer Web Platform for Affordable Student Housing in Denmark with Built-in Scam Prevention.* BSc (Hons) Computer Science thesis, Niels Brock Copenhagen Business College. Supervisor: Fati Tahiru.
+> Md Fahim (2026). *BoligMatch: A Peer-to-Peer Web Platform for Affordable Student Housing in Denmark with Built-in Scam Prevention.* BSc (Hons) Computer Science thesis, De Montfort University. Supervisor: Fati Tahiru.
 
 ## Third-Party Components
 
