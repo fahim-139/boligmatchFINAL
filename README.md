@@ -127,4 +127,3 @@ Released for academic and educational use only. See [`LICENSE.md`](LICENSE.md).
 - **Fati Tahiru** — project supervisor
 - **Niels Brock Copenhagen Business College** — institution
 - **PHPMailer** team — for the SMTP library
-- **Anthropic Claude** — used as an AI pair-programming assistant. All architectural decisions, requirements analysis, testing, and thesis writing are the student's own work.
