@@ -144,7 +144,6 @@ If no email arrives, see [Troubleshooting](#troubleshooting) below.
 
 ## Test Accounts
 
-All pre-existing test accounts use password `Test1234!`.
 
 | Role | Email |
 |---|---|
@@ -154,7 +153,6 @@ All pre-existing test accounts use password `Test1234!`.
 | Student | `amara@student.dk` |
 | Student | `carlos@student.dk` |
 
-**Admin two-factor access code:** `BM-ADMIN-2026`
 
 Login URLs:
 - Regular login: http://localhost/boligmatch/frontend/login.html
@@ -172,7 +170,6 @@ Login URLs:
 | Email never arrives | 2-Step Verification not enabled | Enable it before creating the App Password |
 | Email never arrives | `PHPMailer/` folder missing or wrong location | Must be `backend/PHPMailer/` exactly |
 | Email never arrives | `mailer.php` credentials empty | Edit `mailer.php` and fill in `$GMAIL_ADDRESS` and `$GMAIL_APP_PASSWORD` |
-| Login says "incorrect password" with `Test1234!` | Database hashes corrupted | Re-import `boligmatch.sql` fresh |
 | Photos don't show | Upload folders don't exist | Create `backend/uploads/listings/` and `backend/uploads/documents/` |
 | Reset link says "expired" immediately | Old version of `forgot-password.php` | Pull latest from repo (expiry is 24 hours) |
 
