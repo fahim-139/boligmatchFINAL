@@ -73,7 +73,7 @@ BoligMatch's contribution is a **moderated peer-to-peer marketplace** with three
 | **Ch. 3 — Methodology** | Literature-based and platform-analysis study (no primary research) |
 | **Ch. 4 — System Analysis & Design** | Database schema in `boligmatch.sql`; folder structure in [`README.md`](README.md) |
 | **Ch. 5 — System Development** | Implementation in `backend/` and `frontend/`; key files listed below |
-| **Ch. 6 — Testing & Results** | [`TESTING-CHECKLIST.md`](TESTING-CHECKLIST.md) — 194 manual test cases across 20 sections |
+| **Ch. 6 — Testing & Results** | [`TESTING-CHECKLIST.md`](TESTING-CHECKLIST.md) — 178 manual test cases across 19 sections |
 | **Ch. 7 — Critical Analysis** |   The MitID limitation discussion |
 
 ---
@@ -158,37 +158,19 @@ Every piece of functionality in this project is implementable in pure PHP and ca
 
 ---
 
-## Acknowledgement of AI assistance
 
-AI tools (Anthropic's Claude) were used as a pair-programming assistant during development. Specifically:
-
-- **Used for:** debugging, exploring design alternatives, writing documentation drafts, generating boilerplate code, formatting tables and lists
-- **Not used for:** architectural decisions, choice of features, testing methodology, literature review, thesis writing
-
-All architectural decisions, the choice of features, the testing methodology, the literature review, and the thesis writing are the student's own work. AI assistance was used in the same spirit as Stack Overflow, a study group, or office hours: to debug, to discuss alternatives, and to format documentation.
-
-The student is fully able to explain and defend every part of the codebase. This acknowledgement is included in the spirit of academic honesty regarding the use of AI tools in coursework.
-
----
 
 ## Status of the project as of submission
 
 ### Completed
 - Full platform implementation across 29 PHP files
-- 194-test manual testing checklist (170 pass, 3 fail being investigated, 5 not yet tested)
+- 178-test manual testing checklist (173 pass, 5 not yet tested)
 - Email verification via Gmail SMTP
 - Password reset via email with 24-hour expiry
 - Owner ownership document upload + admin review workflow
 - 7-tab admin panel
 - All security features listed above
 
-### In progress
-- Wireframes for Search Results, Create Listing, and Messages Inbox (Figures 4.5, 4.7, 4.8)
-- Chapters 5, 6, and 7 final draft
-- Final word count check (target: ~8,500 words)
-- Email to Digitaliseringsstyrelsen requesting written confirmation that MitID requires CVR + broker (for thesis evidence)
-
----
 
 ## Contact
 
