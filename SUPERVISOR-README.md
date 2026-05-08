@@ -127,7 +127,7 @@ Danish national digital ID (MitID) cannot be implemented in an undergraduate the
 4. GDPR sensitive personal data (CPR numbers) cannot legally be processed by an academic prototype
 5. Localhost development is incompatible with MitID's OAuth callback requirements (HTTPS-only, registered domains)
 
-This is documented in detail in [`MITID-THESIS-SECTION.md`](MITID-THESIS-SECTION.md) and discussed in Chapter 7. **MitID integration is recommended as the top priority future enhancement.**
+This is documented in detail in  discussed in Chapter 7. **MitID integration is recommended as the top priority future enhancement.**
 
 ### Scam detection is keyword-based, not AI
 
