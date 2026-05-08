@@ -74,7 +74,7 @@ BoligMatch's contribution is a **moderated peer-to-peer marketplace** with three
 | **Ch. 4 — System Analysis & Design** | Database schema in `boligmatch.sql`; folder structure in [`README.md`](README.md) |
 | **Ch. 5 — System Development** | Implementation in `backend/` and `frontend/`; key files listed below |
 | **Ch. 6 — Testing & Results** | [`TESTING-CHECKLIST.md`](TESTING-CHECKLIST.md) — 194 manual test cases across 20 sections |
-| **Ch. 7 — Critical Analysis** | [`MITID-THESIS-SECTION.md`](MITID-THESIS-SECTION.md) for the MitID limitation discussion |
+| **Ch. 7 — Critical Analysis** |   The MitID limitation discussion |
 
 ---
 
@@ -196,4 +196,4 @@ For any questions about the platform's behavior or code, please reply through th
 
 Thank you for your supervision and feedback throughout this project.
 
-— **Md Fahim** (P2837496)
+— **Md Fahim** 
