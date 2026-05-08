@@ -2,7 +2,7 @@
 
 A peer-to-peer web platform connecting international students with affordable, low-deposit room rentals in Denmark — with built-in scam prevention.
 
-> Final-year BSc (Hons) Computer Science thesis project at Niels Brock Copenhagen Business College.
+> Final-year BSc (Hons) Computer Science thesis project at De Montfort University.
 > **Student:** Md Fahim · **Supervisor:** Fati Tahiru
 
 ---
@@ -100,7 +100,6 @@ boligmatch/
 | [`SUPERVISOR-SETUP.md`](SUPERVISOR-SETUP.md) | Project supervisor — quick install |
 | [`SUPERVISOR-README.md`](SUPERVISOR-README.md) | Project supervisor — thesis evaluation |
 | [`TESTING-CHECKLIST.md`](TESTING-CHECKLIST.md) | 194-test manual test plan |
-| [`MITID-THESIS-SECTION.md`](MITID-THESIS-SECTION.md) | Justification for excluding MitID integration |
 | [`LICENSE.md`](LICENSE.md) | Academic-use license |
 
 ---
