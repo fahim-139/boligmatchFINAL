@@ -129,7 +129,7 @@ You should see the BoligMatch homepage with sample listings.
 
 ## Step 7 — Log in with test accounts
 
-I have created accounts you can use right away. **Password for all accounts:** `Test1234!`
+I have created accounts you can use right away. 
 
 | Role | Email | Notes |
 |---|---|---|
@@ -142,8 +142,7 @@ I have created accounts you can use right away. **Password for all accounts:** `
 **Login URLs:**
 - Student/Owner login: http://localhost/boligmatch/frontend/login.html
 - Admin login: http://localhost/boligmatch/backend/admin-login.php
-
-**Admin two-factor access code:** `BM-ADMIN-2026`
+`
 
 The admin login asks for the access code first, then for the email and password.
 
@@ -160,12 +159,12 @@ Once everything is running, this is the most efficient way to evaluate the platf
 - Try to send a message — note that it requires sign-in
 
 ### 2. Log in as a student (2 min)
-- Sign in as `amara@student.dk` / `Test1234!`
+- Sign in as `amara@student.dk` / `password shared in mail`
 - Look at the home dashboard with available rooms and saved listings
 - Open a listing, save it (heart icon), and send a test message
 
 ### 3. Log in as an owner (2 min)
-- Sign out, sign in as `lars@example.dk` / `Test1234!`
+- Sign out, sign in as `lars@example.dk` / `password shared in mail!`
 - View the owner dashboard
 - Open the inbox and read the message you sent in step 2
 
@@ -173,7 +172,7 @@ Once everything is running, this is the most efficient way to evaluate the platf
 - Sign out
 - **Register a new owner account** using your own email (the one I gave credentials for in Step 4 will receive verification codes)
 - Notice that you're required to upload an ownership document before any listing goes public
-- Sign in to the admin panel (`admin@boligmatch.local` + access code `BM-ADMIN-2026`)
+- Sign in to the admin panel (`admin@boligmatch.local` + access code `code shared in  mail`)
 - Go to the **Ownership** tab — you'll see your test owner's document waiting for review
 - Approve or reject the document
 
@@ -202,9 +201,8 @@ The only features that need email are:
 |---|---|---|
 | Homepage shows "Connection refused" | Apache or MySQL not running | XAMPP Control Panel → Start both |
 | Email never arrives | Wrong App Password OR PHPMailer folder missing | Re-check Steps 3 and 4 |
-| Login says "incorrect password" with `Test1234!` | Database imported partially | Re-import `boligmatch.sql` fresh |
 | Photos don't show on listings | Upload folders don't exist | Create `backend/uploads/listings/` if missing |
-| Admin login rejects access code | You typed it wrong | The code is exactly: `BM-ADMIN-2026` (uppercase, with the hyphen) |
+| Admin login rejects access code | You typed it wrong | 
 | Page shows PHP code instead of website | You opened the file directly instead of via browser | Always use http://localhost/boligmatch/... not file:// |
 
 If you encounter a problem not on this list, please send me a screenshot of the error and the URL you were on — I can usually pinpoint the cause within a few minutes.
@@ -219,7 +217,7 @@ If you encounter a problem not on this list, please send me a screenshot of the 
 | **Ch. 4 — System Analysis & Design** | The database schema (`boligmatch.sql`) and folder structure |
 | **Ch. 5 — System Development** | Implementation in `backend/` and `frontend/` |
 | **Ch. 6 — Testing & Results** | `TESTING-CHECKLIST.md` (194 tests across 20 sections) |
-| **Ch. 7 — Critical Analysis** | `MITID-THESIS-SECTION.md` for the MitID limitation discussion |
+| **Ch. 7 — Critical Analysis** | `For the MitID limitation discussion |
 
 For a deeper tour of the project's design, security implementation, and limitations, please see [`SUPERVISOR-README.md`](SUPERVISOR-README.md) in the same folder.
 
