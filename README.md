@@ -124,5 +124,5 @@ Released for academic and educational use only. See [`LICENSE.md`](LICENSE.md).
 ## Acknowledgements
 
 - **Fati Tahiru** — project supervisor
-- **Niels Brock Copenhagen Business College** — institution
+- **De Montfort University** — institution
 - **PHPMailer** team — for the SMTP library
